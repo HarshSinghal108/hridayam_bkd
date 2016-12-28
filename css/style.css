@@ -1,0 +1,64 @@
+.main_logo{
+  float: left;
+}
+
+.brand_name1{
+  font-size:35px;
+  font-weight:bold;
+  font-family:monospace;
+  color: black;
+}
+
+.brand_name2{
+  font-size: 35px;
+  font-weight: bold;
+  font-family: monospace;
+  color: black;
+  margin-top: -49px;
+}
+
+.navbar{
+  background-color: #44e2dc;
+  border-bottom:1px solid #e3e3e3;
+}
+.content1{
+  font-family: 'Reem Kufi', sans-serif;
+  font-size: 25px;
+}
+
+.content{
+  /*padding-top: 30%;*/
+  background-color: hsla(0, 100%, 70%, 0.3);
+  /*margin-top: 2%;*/
+}
+
+.footer{
+  padding-top: 5%;
+  background-color: #98FB98;
+  margin-top: 2%;
+  float: left;
+  margin-left: 1%
+}
+.contact{
+  float: right;
+  color: black;
+}
+
+.tag_line{
+  margin-left: 55%;
+  margin-top: 4%;
+}
+
+.carousel-inner>.item>img {
+    line-height: 1;
+    margin-left: 17%;
+}
+
+.logo{
+  padding: auto;
+}
+
+.sub_logo{
+  margin-top: 8px;
+  margin-left: -34px;
+}
