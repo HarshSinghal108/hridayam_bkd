@@ -28,20 +28,28 @@
 
 .content{
   /*padding-top: 30%;*/
-  background-color: hsla(0, 100%, 70%, 0.3);
+  /*background-color: hsla(0, 100%, 70%, 0.3);*/
   /*margin-top: 2%;*/
 }
 
 .footer{
-  padding-top: 5%;
-  background-color: #98FB98;
+  /*background-color: #98FB98;*/
   margin-top: 2%;
-  float: left;
-  margin-left: 1%
 }
+
+.footer_content{
+  margin-left: 25px;
+}
+
 .contact{
   float: right;
   color: black;
+}
+
+.footer_social_logo{
+  float: right;
+  margin-top: -48px;
+  margin-right: 540px;
 }
 
 .tag_line{
@@ -50,8 +58,8 @@
 }
 
 .carousel-inner>.item>img {
-    line-height: 1;
-    margin-left: 17%;
+  line-height: 1;
+  margin-left: 17%;
 }
 
 .logo{
@@ -61,4 +69,12 @@
 .sub_logo{
   margin-top: 8px;
   margin-left: -34px;
+}
+
+.feedback_radio{
+  margin-left: 19px;
+}
+
+.order_option{
+  width: 35%;
 }
