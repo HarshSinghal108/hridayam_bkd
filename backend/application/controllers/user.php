@@ -44,7 +44,7 @@ Class user extends CI_CONTROLLER {
 	}	
 
 
-public function add_user_feedback(){
+	public function add_user_feedback(){
 
         
 		$data = file_get_contents("php://input");
@@ -67,4 +67,5 @@ public function add_user_feedback(){
 			$this->gm->send_response(false,'Empty_Field','','');
 		}
 	}
+
 }
