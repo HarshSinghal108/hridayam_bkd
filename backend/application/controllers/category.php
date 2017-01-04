@@ -44,4 +44,31 @@ Class category extends CI_CONTROLLER {
 			$this->gm->send_response(false,'Empty_Field','','');
 		}
 	}
+
+
+		public function list_category(){
+
+        
+		$data = file_get_contents("php://input");
+		$data = json_decode($data, TRUE);
+
+		if(isset($data['category_id']))
+		{
+			$cat_where=array('category_parent_id'=>$data['category_id']);
+			$cat_data=$this->cm->get_category($cat_where);
+			
+			if(sizeof($cat_data)==0)
+			{
+				$this->gm->send_response(false,'No_Category_Found','','');
+			}
+			else
+			{
+				$this->gm->send_response(true,'Category_List','',$cat_data);
+			}	
+		}
+		else
+		{
+			$this->gm->send_response(false,'Empty_Field','','');
+		}
+	}
 }

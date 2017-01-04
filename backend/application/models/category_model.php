@@ -41,4 +41,12 @@ class Category_model extends CI_MODEL
         }
     }
 
+    public function get_category($where)
+    {
+        $arr=array();
+        $query=$this->db->select('*')->where($where)->get('bkd_category');
+        $arr=$query->result_array();
+        return $arr;
+    }
+
 }
