@@ -50,8 +50,8 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'mysql.hostinger.in';
 $db['default']['username'] = 'u448482450_root';
-$db['default']['password'] = 'u448482450_bkd';
-$db['default']['database'] = 'bkd@123';
+$db['default']['password'] = 'bkd@123';
+$db['default']['database'] = 'u448482450_bkd';
 // $db['default']['hostname'] = 'localhost';
 // $db['default']['username'] = 'root';
 // $db['default']['password'] = 'ram';
