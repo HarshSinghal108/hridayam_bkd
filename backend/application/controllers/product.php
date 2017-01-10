@@ -38,7 +38,6 @@ Class product extends CI_CONTROLLER {
 				$this->gm->send_response(false,'Category_Not_Exists','','');
 			}
 			
-print_r($cat);
 			$prod_where=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id']);
 			$flag=$this->pm->check_product_exists($prod_where);
 			
