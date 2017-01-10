@@ -17,6 +17,7 @@ class Category_model extends CI_MODEL
    public function check_category_exists($where)
     {
         $query=$this->db->select('*')->where($where)->get('bkd_category');
+        
         $num= $query->num_rows();
         if($num>0)
         {   

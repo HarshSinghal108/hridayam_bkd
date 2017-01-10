@@ -31,14 +31,14 @@ Class product extends CI_CONTROLLER {
 
 
 			$cat_where=array('category_id'=>$data['category_id']);
-			$flag1=$this->cm->check_category_exists($cat_where);
+			$cat=$this->cm->get_category($cat_where);
 
-			if(!$flag1)
+			if(sizeof($cat)==0)
 			{
 				$this->gm->send_response(false,'Category_Not_Exists','','');
 			}
 			
-
+print_r($cat);
 			$prod_where=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id']);
 			$flag=$this->pm->check_product_exists($prod_where);
 			
@@ -48,7 +48,7 @@ Class product extends CI_CONTROLLER {
 			}
 			else
 			{
-				$prod_data=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id'],'product_added_on'=>time(),'product_updated_on'=>time());
+				$prod_data=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id'],'product_category_id'=>$cat[0]['category_parent_id'],'product_added_on'=>time(),'product_updated_on'=>time());
 				$product_id=$this->pm->add_product($prod_data);
 				$this->gm->send_response(true,'Success','',$product_id);
 			}	

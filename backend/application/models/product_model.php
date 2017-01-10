@@ -41,10 +41,10 @@ class Product_model extends CI_MODEL
         }
     }
 
-    public function get_category($where)
+    public function get_product($where)
     {
         $arr=array();
-        $query=$this->db->select('*')->where($where)->get('bkd_category');
+        $query=$this->db->select('*')->where($where)->get('bkd_product');
         $arr=$query->result_array();
         return $arr;
     }

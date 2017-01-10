@@ -15,6 +15,7 @@ Class category extends CI_CONTROLLER {
         $this->input_arr=include('variables/user_variables.php');
         $this->load->model('general_model','gm',true);
         $this->load->model('category_model','cm',true);
+        $this->load->model('product_model','pm',true);
        
 	}
 
@@ -52,19 +53,24 @@ Class category extends CI_CONTROLLER {
         
 		$data = file_get_contents("php://input");
 		$data = json_decode($data, TRUE);
-
+		$prod_data=array();
+		$cat_data=array();
 		if(isset($data['category_id']))
 		{
 			$cat_where=array('category_parent_id'=>$data['category_id']);
 			$cat_data=$this->cm->get_category($cat_where);
 			
-			if(sizeof($cat_data)==0)
+			$prod_where=array('product_subcategory_id'=>$data['category_id']);
+			$prod_data=$this->pm->get_product($prod_where);
+			
+			if(sizeof($cat_data)==0 && sizeof($prod_data)==0)
 			{
-				$this->gm->send_response(false,'No_Category_Found','','');
+				$this->gm->send_response(false,'No_Result_Found','','');
 			}
 			else
 			{
-				$this->gm->send_response(true,'Category_List','',$cat_data);
+				$result_data=array('category'=>$cat_data,'product'=>$prod_data); 
+				$this->gm->send_response(true,'Result','',$result_data);
 			}	
 		}
 		else
