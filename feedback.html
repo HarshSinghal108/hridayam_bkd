@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html ng-app="rateMe" ng-controller="Header">
+<html ng-app="bkd" ng-controller="Feedback">
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
   <link rel="stylesheet" href="css/style.css">
   <style>
   </style>
 </head>
 <body>
-  <nav class="navbar">
+  <!-- <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
         <img src="images/logo.png" class="img-circle main_logo" alt="Image Not Avail" width="80" height="80">
@@ -33,7 +35,7 @@
     </ul>
   </div>
   <!--nav ends here-->
-  <!--body content comes here-->
+  <!--body content comes here--> -->
 
 
   <div class="row content">
@@ -46,14 +48,14 @@
     <div class="col-xs-4">
     </div>
     <div class="col-xs-4">
-      <form>
+      <form name="feedbackForm" ng-submit="addFeedback()">
       <div class="form-group">
         <label for="anvr">1.How do you buy your daily needs?:</label>
-        <div class="checkbox">
-          <label><input type="checkbox" value="">Online</label>
+        <div class="checkbox" >
+          <label><input type="checkbox" value="Online" ng-model="medium.online">Online</label>
         </div>
         <div class="checkbox">
-          <label><input type="checkbox" value="">Shop</label>
+          <label><input type="checkbox" value="Shop" ng-model="medium.shop">Shop</label>
         </div>
         <!-- <div class="checkbox disabled">
         <label><input type="checkbox" value="" disabled>Option 3</label>
@@ -62,14 +64,14 @@
 
     <div class="form-group">
       <label for="anvr">2.When you go for shopping?:</label>
-      <div class="checkbox">
-        <label><input type="checkbox" value="">Daily</label>
+      <div class="checkbox" >
+        <label><input type="checkbox" value="daily" ng-model="schedule.daily">Daily</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" value="">Weekly</label>
+        <label><input type="checkbox" value="weekly" ng-model="schedule.weekly">Weekly</label>
       </div>
       <div class="checkbox">
-        <label><input type="checkbox" value="">Monthly</label>
+        <label><input type="checkbox" value="monthly" ng-model="schedule.monthly">Monthly</label>
       </div>
       <!-- <div class="checkbox disabled">
       <label><input type="checkbox" value="" disabled>Option 3</label>
@@ -79,15 +81,15 @@
 
   <div class="form-group">
     <label for="feedback">3.Feedback:</label><br>
-    <label class="radio feedback_radio"><input type="radio" value="">Impressive</label>
-    <label class="radio feedback_radio"><input type="radio" value="">Avereage</label>
-    <label class="radio feedback_radio"><input type="radio" value="">Will think about</label>
-    <label class="radio feedback_radio"><input type="radio" value="">Unimpressive</label>
+    <label class="radio feedback_radio"><input type="radio" value="Impressive" ng-model="feedback">Impressive</label>
+    <label class="radio feedback_radio"><input type="radio" value="Avereage" ng-model="feedback">Avereage</label>
+    <label class="radio feedback_radio"><input type="radio" value="Will think about it" ng-model="feedback">Will think about</label>
+    <label class="radio feedback_radio"><input type="radio" value="Unimpressive" ng-model="feedback">Unimpressive</label>
   </div>
 
   <div class="form-group">
     <label for="suggestion">4.Suggestion:</label>
-    <textarea class="form-control" rows="5" id="suggestion"></textarea>
+    <textarea class="form-control" rows="5" id="suggestion" ng-model="suggestion"></textarea>
   </div>
 
 

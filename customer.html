@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html ng-app="rateMe" ng-controller="Header">
+<html ng-app="bkd" ng-controller="Customer">
 <head>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+  <script type="text/javascript" src="angular.min.js"></script>
+  <script type="text/javascript" src="app.js"></script>
+  <link rel="stylesheet" href="css/style.css">  <style>
   </style>
 </head>
 <body>
-  <nav class="navbar">
+  <!-- <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
         <img src="images/logo.png" class="img-circle main_logo" alt="Image Not Avail" width="80" height="80">
@@ -31,7 +33,7 @@
       <li><a href="feedback.html">Feedback</a></li>
       <li><a href="survey.html">Survey</a></li>
     </ul>
-  </div>
+  </div> -->
   <!--nav ends here-->
   <!--body content comes here-->
 
@@ -46,51 +48,81 @@
     <div class="col-xs-4">
     </div>
     <div class="col-xs-4">
-      <form>
+      <form name="customerForm" ng-submit="addCustomer()">
         <div class="form-group">
           <label for="fname">First Name:</label>
-          <input type="text" class="form-control" id="fname">
+          <input type="text" class="form-control" id="fname" ng-model="user.fname">
         </div>
 
         <div class="form-group">
           <label for="laname">Last Name:</label>
-          <input type="text" class="form-control" id="lname">
+          <input type="text" class="form-control" id="lname" ng-model="user.lname">
         </div>
 
         <div class="form-group">
           <label for="gender">Gender:</label><br>
-          <label class="radio-inline"><input type="radio" value="">Option 1</label>
-          <label class="radio-inline"><input type="radio" value="">Option 2</label>
+          <label class="radio-inline"><input type="radio" value="male" ng-model="user.gender">Option 1</label>
+          <label class="radio-inline"><input type="radio" value="female" ng-model="user.gender">Option 2</label>
         </div>
 
         <div class="form-group">
           <label for="address">Address:</label>
-          <input type="text" class="form-control" id="address">
+          <input type="text" class="form-control" id="address" ng-model="user.address">
+        </div>
+
+        <div class="form-group">
+          <label for="landmark">Landmark:</label>
+          <input type="text" class="form-control" id="landmark" ng-model="user.landmark">
+        </div>
+
+        <div class="form-group">
+          <label for="district">District:</label>
+          <input type="text" class="form-control" id="district" ng-model="user.district">
+        </div>
+
+        <div class="form-group">
+          <label for="city">City:</label>
+          <input type="text" class="form-control" id="city" ng-model="user.city">
+        </div>
+
+        <div class="form-group">
+          <label for="state">State:</label>
+          <input type="text" class="form-control" id="state" ng-model="user.state">
+        </div>
+
+        <div class="form-group">
+          <label for="country">Country:</label>
+          <input type="text" class="form-control" id="country" ng-model="user.country">
+        </div>
+
+        <div class="form-group">
+          <label for="pincode">Pincode:</label>
+          <input type="text" class="form-control" id="pincode" ng-model="user.pincode">
         </div>
 
         <div class="form-group">
           <label for="mobile">Mobile no.:</label>
-          <input type="text" class="form-control" id="mobile">
+          <input type="text" class="form-control" id="mobile" ng-model="user.mobile">
         </div>
 
         <div class="form-group">
           <label for="telephone">Telephone no.:</label>
-          <input type="text" class="form-control" id="telephone">
+          <input type="text" class="form-control" id="telephone" ng-model="user.telephone">
         </div>
 
         <div class="form-group">
           <label for="email">Email:</label>
-          <input type="email" class="form-control" id="email">
+          <input type="email" class="form-control" id="email" ng-model="user.email">
         </div>
 
         <div class="form-group">
           <label for="dob">Date of Birth:</label>
-          <input type="date" class="form-control" id="dob">
+          <input type="date" class="form-control" id="dob" ng-model="user.dob">
         </div>
 
         <div class="form-group">
           <label for="anvr">Anneversery:</label>
-          <input type="date" class="form-control" id="anvr">
+          <input type="date" class="form-control" id="anvr" ng-model="user.anvr">
         </div>
 
         <button type="submit" class="btn btn-default">Submit</button>
