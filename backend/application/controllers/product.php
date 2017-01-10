@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-Class category extends CI_CONTROLLER {
+Class product extends CI_CONTROLLER {
 
 
     public function __construct()
@@ -14,20 +14,33 @@ Class category extends CI_CONTROLLER {
     	// $this->load->library('session');
         $this->input_arr=include('variables/user_variables.php');
         $this->load->model('general_model','gm',true);
+        $this->load->model('product_model','pm',true);
         $this->load->model('category_model','cm',true);
+       
        
 	}
 
-	public function add_category(){
+	public function add_product(){
 
         
 		$data = file_get_contents("php://input");
 		$data = json_decode($data, TRUE);
 
-		if(isset($data['category_name']) && isset($data['category_parent_id']))
+		if(isset($data['product_name']) && isset($data['category_id']))
 		{
-			$cat_where=array('category_name'=>$data['category_name'],'category_parent_id'=>$data['category_parent_id']);
-			$flag=$this->cm->check_category_exists($cat_where);
+
+
+			$cat_where=array('category_id'=>$data['category_id']);
+			$flag1=$this->cm->check_category_exists($cat_where);
+
+			if(!$flag1)
+			{
+				$this->gm->send_response(false,'Category_Not_Exists','','');
+			}
+			
+
+			$prod_where=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id']);
+			$flag=$this->pm->check_product_exists($prod_where);
 			
 			if($flag)
 			{
@@ -35,9 +48,9 @@ Class category extends CI_CONTROLLER {
 			}
 			else
 			{
-				$cat_data=array('category_name'=>$data['category_name'],'category_parent_id'=>$data['category_parent_id'],'category_added_on'=>time(),'category_updated_on'=>time());
-				$category_id=$this->cm->add_category($cat_data);
-				$this->gm->send_response(true,'Success','',$category_id);
+				$prod_data=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id'],'product_added_on'=>time(),'product_updated_on'=>time());
+				$product_id=$this->pm->add_product($prod_data);
+				$this->gm->send_response(true,'Success','',$product_id);
 			}	
 		}
 		else
@@ -47,7 +60,7 @@ Class category extends CI_CONTROLLER {
 	}
 
 
-		public function list_category(){
+		public function list_product(){
 
         
 		$data = file_get_contents("php://input");
