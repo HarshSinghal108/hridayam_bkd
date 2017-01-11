@@ -92,6 +92,9 @@ Class user extends CI_CONTROLLER {
      $data = file_get_contents("php://input");
      $data = json_decode($data, TRUE);
 
+     if(empty($data['first_name']) ||empty($data['last_name']) ||empty($data['login_value']) ||empty($data['password'])){
+       $this->gm->send_response(false,"Empty_Field",'',$data);
+     }
      //bind data
      $first_name=$data['first_name'];
      $last_name=$data['last_name'];
@@ -143,6 +146,10 @@ Class user extends CI_CONTROLLER {
       $data = file_get_contents("php://input");
       $data = json_decode($data, TRUE);
 
+      if(empty($data['first_name']) ||empty($data['last_name']) ||empty($data['mobile']) ||empty($data['telephone'])||empty($data['gender'])||empty($data['email'])||empty($data['dob'])||empty($data['dom']) ){
+        $this->gm->send_response(false,"Empty_Field",'',$data);
+      }
+
       //bind the data
       $user_data = array(
         'user_id'=>$user_id,
@@ -192,6 +199,10 @@ Class user extends CI_CONTROLLER {
        //take input
        $data = file_get_contents("php://input");
        $data = json_decode($data, TRUE);
+
+       if(empty($data['login_value']) ||empty($data['password'])){
+         $this->gm->send_response(false,"Empty_Field",'',$data);
+       }
 
        $login_value=$data['login_value'];
        $password=md5($data['password']);
