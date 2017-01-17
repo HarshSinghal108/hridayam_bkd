@@ -34,9 +34,8 @@ Class Shopping extends CI_CONTROLLER {
     $data = json_decode($data, TRUE);
 
     //check empty fields
-    if(empty($data['product_id']) ||empty($data['quantity'])){
-      $this->gm->send_response(false,"Empty_Field",'',$data);
-    }
+    $fields = array('product_id','quantity');
+    $this->gm->check_empty_fields($data,$fields);
 
     //bind data
     $product_id=$data['product_id'];
@@ -95,10 +94,8 @@ Class Shopping extends CI_CONTROLLER {
     $data = file_get_contents("php://input");
     $data = json_decode($data, TRUE);
 
-    //check empty fields
-    if(empty($data['cart_id']) ||empty($data['quantity']) ||empty($data['product_id'])){
-      $this->gm->send_response(false,"Empty_Field",'',$data);
-    }
+    $fields = array('cart_id','quantity','product_id');
+    $this->gm->check_empty_fields($data,$fields);
 
     //bind data
     $product_id=$data['product_id'];
@@ -159,10 +156,8 @@ Class Shopping extends CI_CONTROLLER {
     $data = file_get_contents("php://input");
     $data = json_decode($data, TRUE);
 
-    //check empty fields
-    if(empty($data['cart_id'])){
-      $this->gm->send_response(false,"Empty_Field",'',$data);
-    }
+    $fields = array('cart_id');
+    $this->gm->check_empty_fields($data,$fields);
 
     //bind data
     $cart_id=$data['cart_id'];
@@ -261,11 +256,8 @@ Class Shopping extends CI_CONTROLLER {
       $data = file_get_contents("php://input");
       $data = json_decode($data, TRUE);
 
-      //check empty fields
-      if(empty($data['product_id'])){
-        $this->gm->send_response(false,"Empty_Field",'',$data);
-      }
-
+      $fields = array('product_id');
+      $this->gm->check_empty_fields($data,$fields);
       //bind data
       $product_id=$data['product_id'];
 
@@ -315,17 +307,13 @@ Class Shopping extends CI_CONTROLLER {
       $data = file_get_contents("php://input");
       $data = json_decode($data, TRUE);
 
-      //check empty fields
-      if(empty($data['wishlist_id'])){
-        $this->gm->send_response(false,"Empty_Field",'',$data);
-      }
-
-      //bind data
-      $wishlist_id=$data['wishlist_id'];
+      $fields = array('wishlist_id','new_password');
+      $this->gm->check_empty_fields($data,$fields);
 
       //check if cart id is authentic or not
       $where_wishlist=array('wishlist_id'=>$wishlist_id,'user_id'=>$user_id);
       $response=$this->sm->select_wishlist($where_wishlist);
+
       if(!count($response)){
         $this->gm->send_response(false,'Invalid_wishlist_Id','',$wishlist_id);
       }
@@ -343,7 +331,7 @@ Class Shopping extends CI_CONTROLLER {
 
 
     /********************************************************************************
-    * * Function            : delete wishlist
+    * * Function            : delete all wishlist
     * * Description         : product are deleted from the wishlist
     * * Input Parameters    :
     * * Return Values       :  true or false(JSON)
@@ -363,6 +351,35 @@ Class Shopping extends CI_CONTROLLER {
         $this->gm->send_response(false,'Some_Error_Occured','somme_error_occured_while_deleting_data','');
       }
     }
+
+
+    /********************************************************************************
+    * * Function            : list wishlist
+    * * Description         : product are listed from the wishlist
+    * * Input Parameters    : user_id from session
+    * * Return Values       :  true or false(JSON)
+    * ****************************************************************************** */
+      public function list_wishlist(){
+        if(!$user_id=$this->session->userdata('user_id')){//check if someone is allready logged in or not
+          $this->gm->send_response(false,'Session_Expired','','');
+        }
+
+        $response=$this->sm->list_wishlist($user_id);
+
+        if($response){
+          for ($i=0; $i <count($response) ; $i++) {
+            $data[$i]['wishlist_id']=$response[$i]['wishlist_id'];
+            $data[$i]['product_id']=$response[$i]['product_id'];
+            $data[$i]['product_name']=$response[$i]['product_name'];
+            $data[$i]['product_image']=$response[$i]['product_image'];
+          }
+          $this->gm->send_response(true,'Success','',$data);
+        }
+        else {
+          $this->gm->send_response(false,'Empty_Wishlist','','');
+        }
+      }
+
 
 
 

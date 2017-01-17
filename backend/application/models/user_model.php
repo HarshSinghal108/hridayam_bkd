@@ -14,6 +14,19 @@ class User_model extends CI_MODEL
   }
 
 
+    /********************************************************************************
+    * * Function            : select_user
+    * * Description         : select user details
+    * * Input Parameters    : where condition
+    * * Return Values       :  true or false
+    * ****************************************************************************** */
+    public function select_user($where){
+      $this->db->where($where);
+      $query=$this->db->get('bkd_user')->result_array();
+      return $query;
+    }
+
+
   /********************************************************************************
   * * Function            : check if user exist or not
   * * Description         : check if mobile number or email are unique or not
@@ -60,8 +73,8 @@ class User_model extends CI_MODEL
   * * Input Parameters    : user_data
   * * Return Values       :  true or false
   * ****************************************************************************** */
-  public function update_user($user_data)  {
-    $this->db->where('user_id', $user_data['user_id']);
+  public function update_user($user_data,$where)  {
+    $this->db->where($where);
     $query=$this->db->update('bkd_user', $user_data);
     return $query;
   }

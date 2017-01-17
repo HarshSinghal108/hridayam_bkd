@@ -5,12 +5,12 @@ if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class General_model extends CI_MODEL
 {
- 
+
     function __construct()
     {
-     
+
         parent::__construct();
-        
+
     }
 
     public function log($did)
@@ -18,28 +18,28 @@ class General_model extends CI_MODEL
         $did=$did."update";
         $logs=APPPATH.'logs';
         $log="At time stamp :".time()."data: ".$did.PHP_EOL;
-                    
+
         chdir($logs);
         file_put_contents('log_GPS_'.date("j.n.Y").'.txt', $log, FILE_APPEND);
     }
 
-     
-    public function unset_variables($data, $variables, $type) 
+
+    public function unset_variables($data, $variables, $type)
     {
             //loop the input
-        foreach ($data as $key => $var) 
+        foreach ($data as $key => $var)
         {
             //if type 1 means if key not in varribles then remove it from data
-            if ($type == 1) 
+            if ($type == 1)
             {
 
-                if (!in_array($key, $variables)) 
+                if (!in_array($key, $variables))
                 {
 
                     unset($data[$key]);
                 }
-            } 
-            else 
+            }
+            else
             {
                 //it means if key  in varribles then remove it from data
                 if (in_array($key, $variables))
@@ -55,7 +55,7 @@ class General_model extends CI_MODEL
 
      public function set_user_session($user_role, $id)
      {
-        //set seesion varribles 
+        //set seesion varribles
         $this->session->set_userdata(array('user_logged_in' => '1', 'role' => $user_role, 'admin_id' => $id));
      }
 
@@ -65,20 +65,20 @@ class General_model extends CI_MODEL
      *  @param      :rule,array of data,isset(flag)
      *  @Method     :none
      *  @return     :none
-     *  @brief      :Helper function to validate data according to rules and 
+     *  @brief      :Helper function to validate data according to rules and
      *  @caller     : by all api's to validate input
      */
 
-    public function validate($rule, $dataposted, $isset = true) 
+    public function validate($rule, $dataposted, $isset = true)
     {
         $err = array();
         $flag = true;
         //if isset then we check that field is posted or not
-        if ($isset) 
+        if ($isset)
         {
-            foreach ($dataposted as $value) 
+            foreach ($dataposted as $value)
             {
-                if (!isset($_POST[$value]) && $flag) 
+                if (!isset($_POST[$value]) && $flag)
                 {
                     $flag = false;
                     $err[$value] = "You Need to Post " . $value . " field";
@@ -86,7 +86,7 @@ class General_model extends CI_MODEL
             }
         }
         //true when all things posted
-        if ($flag) 
+        if ($flag)
         {
 
             $this->form_validation->set_rules($rule);
@@ -97,16 +97,16 @@ class General_model extends CI_MODEL
                 $errors = $this->form_error_formating($dataposted);
                 $this->send_response(false, 'form_errors', $errors);
             }
-        } 
+        }
         else
         {
             $this->send_response(false, 'form_error', $err);
         }
     }
-     
 
 
-    public function form_error_formating($dataposted) 
+
+    public function form_error_formating($dataposted)
     {
 
         $errorarray = array();
@@ -126,16 +126,30 @@ class General_model extends CI_MODEL
             exit;
         }
 
-    public function get_input($inputdata) 
+    public function get_input($inputdata)
     {
-    
+
         $inputs = array();
         //looping throgh input data varriblees
         foreach ($inputdata as $var) {
                 $inputs[$var] = $this->input->post($var, TRUE);
-            }        
+            }
         return $inputs;
-    }  
+    }
+
+
+
+    public function check_empty_fields($data,$fields){
+      foreach ($fields as $key => $value) {
+        if(!array_key_exists($value,$data)){
+          $this->send_response(false,"Empty_Field","",$value." is not found");
+        }
+        if(empty($data[$value])){
+          $this->send_response(false,"Empty_Field","",$value." is empty");
+        }
+      }
+      return 0;
+    }
 
 
 

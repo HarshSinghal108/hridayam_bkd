@@ -48,11 +48,12 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-$db['default']['hostname'] = 'localhost';
+$db['default']['hostname'] = 'mysql.hostinger.in';
 $db['default']['username'] = 'u448482450_root';
-$db['default']['password'] = 'baniyekidukaan';
+$db['default']['password'] = 'baniye@123';
 $db['default']['database'] = 'u448482450_bkd';
 
+// $db['default']['hostname'] = 'localhost';
 // $db['default']['password'] = '';
 // $db['default']['database'] = 'bkd';
 // $db['default']['username'] = 'root';

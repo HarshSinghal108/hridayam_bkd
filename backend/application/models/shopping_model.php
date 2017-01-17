@@ -73,11 +73,10 @@ class shopping_model extends CI_MODEL
   public function list_cart($user_id){
     $sql="SELECT bp.`product_id`,`product_name`,`product_price`,`product_image`,`product_discount`
     ,`product_discount_status`,bc.`quantity`,bc.`cart_id` FROM `bkd_product` bp INNER JOIN `bkd_cart` bc
-    ON bp.product_id=bc.product_id WHERE bc.user_id=".$user_id;
+    ON bp.product_id=bc.product_id WHERE bc.user_id=".$user_id." ORDER BY `cart_added_on` DESC";
 
     $query=$this->db->query($sql)->result_array();
     return $query;
-
   }
 
   /********************************************************************************
@@ -101,17 +100,6 @@ class shopping_model extends CI_MODEL
 
 
 
-  /********************************************************************************
-  * * Function            : select_wishlist
-  * * Description         : select wishlist details
-  * * Input Parameters    : where condition
-  * * Return Values       :  true or false
-  * ****************************************************************************** */
-  public function select_wishlist($where){
-    $this->db->where($where);
-    $query=$this->db->get('bkd_wishlist')->result_array();
-    return $query;
-  }
 
 
   /********************************************************************************
@@ -122,6 +110,21 @@ class shopping_model extends CI_MODEL
   * ****************************************************************************** */
   public function delete_wishlist($where){
     $query=$this->db->delete('bkd_wishlist', $where);
+    return $query;
+  }
+
+
+  /********************************************************************************
+  * * Function            : list_wishlist
+  * * Description         : list all products from the wishlist for a particular user
+  * * Input Parameters    :  userId
+  * * Return Values       :  wishlist product data
+  * ****************************************************************************** */
+  public function list_wishlist($user_id){
+    $sql="SELECT bp.`product_id`,`product_name`,`product_price`,`product_image`,`product_discount`
+    ,`product_discount_status`,`wishlist_id` FROM `bkd_product` bp INNER JOIN `bkd_wishlist` bw
+    ON bp.product_id=bw.product_id WHERE bw.user_id=".$user_id." ORDER BY `wishlist_added_on` DESC";
+    $query=$this->db->query($sql)->result_array();
     return $query;
   }
 
