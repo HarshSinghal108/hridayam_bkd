@@ -1,15 +1,122 @@
-<!DOCTYPE html>
-<html ng-app="rateMe" ng-controller="Header">
+<html lang="en" ng-app="bkd" ng-controller="Survey">
+
 <head>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <!-- Meta, title, CSS, favicons, etc. -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Gentallela Alela! | </title>
+
+  <!-- Bootstrap core CSS -->
+
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+
+  <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+  <!-- <link href="css/animate.min.css" rel="stylesheet"> -->
+
+  <!-- Custom styling plus plugins -->
+
+  <!-- <link href="css/icheck/flat/green.css" rel="stylesheet"> -->
+  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <style>
-  </style>
+
+    <script type="text/javascript" src="angular.min.js"></script>
+    <script src="js/jquery.min.js"></script>
+    <script src="config.js"></script>
+
+    <script src="admin_demo.js"></script>
+    <script src="app.js"></script>
+
+
+     <style>
+	i.fa.fa-plus.tooltip_category {
+    cursor: pointer;
+    font-size: 21px;
+    float: right;
+    margin-left: 12px;
+	color: #1a82c3;
+}
+.navbar-inverse {
+    background-color: #44e2dc;
+    border-color: #44e2dc;
+    height: 83px;
+}
+span.glyphicon.glyphicon-chevron-right {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #61d261;
+}
+
+
+
+
+i.fa.fa-plus.tooltip_category.sub {
+    font-size: 15px;
+	color: #1a82c3;
+}
+i.fa.fa-support.sup {
+    margin-right: 6px;
+    color: red;
+    font-size: 17px;
+}
+span.subcategory {
+    font-size: 14px;
+	 cursor: pointer;
+}
+  span.maincategory {
+  cursor: pointer;
+  color: #1a82c3;
+    font-size: 18px;
+    font-style: italic;
+}
+
+	 button.btn.btn-primary.add {
+    margin-right: 19px;
+    float: right;
+    margin-top: 16px;
+}
+	.container.category
+	 {
+         width: 100%;
+   /*margin-top: 97px;*/
+     }
+	 #nav ul.sub-nav {
+    display: none;
+     }
+
+	#nav ul.visible {
+		display: block;
+	}
+		 #nav2 ul.sub-nav {
+    display: none;
+     }
+
+	#nav2 ul.visible {
+		display: block;
+	}
+
+	span.listcat {
+    cursor: pointer;
+    font-size: 18px;
+      }
+
+	 span.listcat1 {
+    cursor: pointer;
+     }
+
+
+
+    </style>
+
+
 </head>
 <body>
+
   <nav class="navbar">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -32,249 +139,157 @@
   <li class="active"><a href="survey.html">Survey</a></li>
 </ul>
 </div>
-<!--nav ends here-->
-<!--body content comes here-->
-<center>
-<h2>Survey</h2>
-</center>
-<form>
-  <div class="row">
-    <h3 style="margin-left:16px">Pooja</h3>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Aggarbatti</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Matches</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Dhoop</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
+<div class="row">
+<div class="col-md-6">
+<div class="container category">
+  <div class="">
+     <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#myModal1" >Add Category</button>
+            </div><h2 style="color: red;font-style: italic;">Category List</h2>
 
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Diya</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
+  <div id="category">
 
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Chunari</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Nariyal</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-
-    </div>
   </div>
 
-  <div class="row">
-    <h3 style="margin-left:16px">Personal needs</h3>
-    <div class="col-xs-2">
+</div>
+</div>
+<div class="col-md-6">
+  <div id="showProduct">
+    <form name="surveyForm" ng-submit="addSurvey()">
+      <div id="productName"></div>
       <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-    </div>
-    <div class="col-xs-2">
+        <input type="hidden" class="form-control" id="productId" value="" ng-model="id" name="product_id">
+      </div>
       <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-    </div>
-    <div class="col-xs-2">
+        <label for="quantity">Quantity:</label>
+        <input type="text" class="form-control" id="quantity" ng-model="quantity">
+      </div>
       <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-    </div>
-    <div class="col-xs-2">
+        <label for="Brand">Brand:</label>
+        <input type="text" class="form-control" id="Brand" ng-model="brand">
+      </div>
       <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-
-    </div>
+        <label for="Size">Size:</label>
+        <input type="text" class="form-control" id="size" ng-model="size">
+      </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+    </form>
   </div>
-  <div class="row">
-    <h3 style="margin-left:16px">Kirana</h3>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
+  <div id="result"></div>
 
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-    </div>
-    <div class="col-xs-2">
-      <div class="form-group">
-      <label for="sel1">Select list (select one):</label>
-      <select class="form-control" id="sel1">
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-      </select>
-    </div>
-
-
-    </div>
-  </div>
-  <button type="submit" class="btn btn-default">Submit</button>
-
-</form>
-
-<div class="row footer">
-  <div class="footer_content well">
-    5/51 Mahatama gandhi road
-    <br>New delhi,India
-    <br><strong>Pin code:</strong>274002
-    <img src="images/footer_social_logo.jpg" class="img footer_social_logo" alt="Image Not Avail" width="200" height="80">
-  </div>
 </div>
 
+</div>
 
+	 <!-- Modal content-->
+    <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add new Category</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+    <div class="form-group">
+      <label for="usr">Category Name:</label>
+      <input type="text" class="form-control" id="category_name">
+    </div>
+
+
+
+  </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  onclick="add_category('main_categoty');" style="
+    width: 82px;">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Sub Category</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+    <div class="form-group">
+      <label for="usr">Category Name:</label>
+      <input type="text" class="form-control" id="sub_category_name">
+    </div>
+
+
+
+  </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  onclick="add_category('sub_categoty');" style="
+    width: 82px;">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!---end--->
+
+
+  	 <!-- Modal content-->
+    <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add new Product</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+    <div class="form-group">
+      <label for="usr">Product Name:</label>
+      <input type="text" class="form-control" id="product_name">
+    </div>
+
+
+
+  </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  onclick="add_product('main_product');" style="
+    width: 82px;">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+    </div>
+	<div align="center" id="loader"> <img style=" height: 47px; width: 50px;" src="loader.gif"></div>
+  </div>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="admin_demo.js"></script>
+<script>
+
+	getCategory();
+
+
+	</script>
 
 </body>
 </html>

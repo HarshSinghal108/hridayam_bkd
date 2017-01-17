@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Gentallela Alela! | </title>
+
+    <!-- Bootstrap core CSS -->
+
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <link href="fonts/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="css/animate.min.css" rel="stylesheet"> -->
+
+    <!-- Custom styling plus plugins -->
+
+    <!-- <link href="css/icheck/flat/green.css" rel="stylesheet"> -->
+    <script src="js/jquery.min.js"></script>
+
+
+    <script src="config.js"></script>
+    <script src="admin_demo.js"></script>
+
+
+     <style>
+	i.fa.fa-plus.tooltip_category {
+    cursor: pointer;
+    font-size: 21px;
+    float: right;
+    margin-left: 12px;
+	color: #1a82c3;
+}
+.navbar-inverse {
+    background-color: #44e2dc;
+    border-color: #44e2dc;
+    height: 83px;
+}
+span.glyphicon.glyphicon-chevron-right {
+    margin-right: 10px;
+    font-size: 16px;
+    color: #61d261;
+}
+
+
+
+
+i.fa.fa-plus.tooltip_category.sub {
+    font-size: 15px;
+	color: #1a82c3;
+}
+i.fa.fa-support.sup {
+    margin-right: 6px;
+    color: red;
+    font-size: 17px;
+}
+span.subcategory {
+    font-size: 14px;
+	 cursor: pointer;
+}
+  span.maincategory {
+  cursor: pointer;
+  color: #1a82c3;
+    font-size: 18px;
+    font-style: italic;
+}
+
+	 button.btn.btn-primary.add {
+    margin-right: 19px;
+    float: right;
+    margin-top: 16px;
+}
+	.container.category
+	 {
+   margin-top: 97px;
+     }
+	 #nav ul.sub-nav {
+    display: none;
+     }
+
+	#nav ul.visible {
+		display: block;
+	}
+		 #nav2 ul.sub-nav {
+    display: none;
+     }
+
+	#nav2 ul.visible {
+		display: block;
+	}
+
+	span.listcat {
+    cursor: pointer;
+    font-size: 18px;
+      }
+
+	 span.listcat1 {
+    cursor: pointer;
+     }
+
+
+
+    </style>
+
+
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="container-fluid">
+      <div class="navbar-header">
+      <img src="images/logo.png" class="img-circle main_logo" alt="Image Not Avail" width="80" height="80">
+      <a class="navbar-brand brand_name" href="#" >Baniye Ki Dukaan</a>
+    </div>
+    <a class="contact" href="#">Contact no. 9568997343 </a>
+    <div class="tag_line">Aapki apni dukaan, now in Kosi Kalan</div>
+
+  </div>
+</nav>
+
+<div class="row">
+<ul class="nav nav-tabs nav-justified">
+  <li ><a href="home.html">Home</a></li>
+  <li ><a href="order.html">Order option</a></li>
+  <li><a href="feature.html">Specail feature</a></li>
+  <li><a href="customer.html">Customer</a></li>
+  <li><a href="feedback.html">Feedback</a></li>
+  <li class="active"><a href="survey.html">Survey</a></li>
+</ul>
+</div>
+<div class="container category">
+<div class="row">
+<div class="col-md-3">
+<h2 style="
+    color: red;
+    font-style: italic;
+">Category List</h2>
+</div>
+
+<div class="">
+   <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#myModal1" >Add Category</button>
+          </div>
+		</div>
+  <div id="category">
+
+  </div>
+
+</div>
+
+
+	</div>
+	 <!-- Modal content-->
+    <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add new Category</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+    <div class="form-group">
+      <label for="usr">Category Name:</label>
+      <input type="text" class="form-control" id="category_name">
+    </div>
+
+
+
+  </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  onclick="add_category('main_categoty');" style="
+    width: 82px;">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+   <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Sub Category</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+    <div class="form-group">
+      <label for="usr">Category Name:</label>
+      <input type="text" class="form-control" id="sub_category_name">
+    </div>
+
+
+
+  </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  onclick="add_category('sub_categoty');" style="
+    width: 82px;">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!---end--->
+
+
+  	 <!-- Modal content-->
+    <div class="modal fade" id="myModal2" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add new Product</h4>
+        </div>
+        <div class="modal-body">
+         <form role="form">
+    <div class="form-group">
+      <label for="usr">Product Name:</label>
+      <input type="text" class="form-control" id="product_name">
+    </div>
+
+
+
+  </form>
+
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary"  onclick="add_product('main_product');" style="
+    width: 82px;">Add</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+    </div>
+	<div align="center" id="loader"> <img style=" height: 47px; width: 50px;" src="loader.gif"></div>
+  </div>
+
+<script src="js/bootstrap.min.js"></script>
+<script src="admin_demo.js"></script>
+<script>
+
+	getCategory();
+
+
+	</script>
+
+</body>
+</html>

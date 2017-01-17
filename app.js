@@ -1,6 +1,7 @@
 (function(){
   var app = angular.module('bkd', [ ]);
 
+
   app.controller('Customer', function($scope, $http) {
 
     $scope.user={};
@@ -28,18 +29,17 @@
 
       $http({
         method  : 'POST',
-        url     : "http://localhost/bkd/backend/index.php/user/add_user",
+        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        }).then(function mySucces(response) {
         //  console.log(JSON.stringify(response));
-         if(response.data.status==true){
-           $scope.userId=response.data.data;
-           console.log("id"+response.data.data);
-         }
-         else {
-           console.error(response);
-         }
+        if(response.data.status==true){
+         alert('success');
+       }
+        else {
+          alert(response.data.message);
+        }
        }, function myError(response) {
          console.error(response);
        });
@@ -53,18 +53,18 @@
 
     $http({
       method  : 'POST',
-      url     : "http://localhost/bkd/backend/index.php/user/is_logged_in",
+      url     : "http://www.baniyekidukaan.in/backend/index.php/user/is_logged_in",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
      }).then(function mySucces(response) {
       //  console.log(JSON.stringify(response));
-       if(response.data.status==true){
-         $scope.userId=response.data.data;
-         console.log("id"+response.data.data);
-       }
-       else {
-         $scope.userId=response.data.data;
-       }
+      if(response.data.status==true){
+       alert('success');
+     }
+      else {
+        alert(response.data.message);
+      }
+
      }, function myError(response) {
        console.error(response);
      });
@@ -81,22 +81,56 @@
 
       $http({
         method  : 'POST',
-        url     : "http://localhost/bkd/backend/index.php/user/add_user_feedback",
+        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user_feedback",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        }).then(function mySucces(response) {
         //  console.log(JSON.stringify(response));
+        if(response.data.status==true){
+         alert('success');
+       }
+        else {
+          alert(response.data.message);
+        }
+
+       }, function myError(response) {
+         console.error(response);
+       });
+    };
+  });
+
+
+
+  app.controller('Survey', function($scope, $http) {
+
+    $scope.survey={};
+    $scope.addSurvey=function(){
+      $scope.data={
+        'product_id':document.getElementsByName('product_id')[0].value,
+        'quantity':$scope.quantity,
+        'brand':$scope.brand,
+        'size':$scope.size
+        };
+
+      $http({
+        method  : 'POST',
+        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_survey",
+        data    : $scope.data, //forms user object
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+       }).then(function mySucces(response) {
          if(response.data.status==true){
-           $scope.userId=response.data.data;
-           console.log("id"+response.data.data);
-         }
+          alert('success');
+        }
          else {
-           console.error(response);
+           alert(response.data.message);
          }
        }, function myError(response) {
          console.error(response);
        });
     };
   });
+
+
+
 
   })();

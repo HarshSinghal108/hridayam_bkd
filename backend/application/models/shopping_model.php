@@ -79,6 +79,52 @@ class shopping_model extends CI_MODEL
     return $query;
 
   }
+
+  /********************************************************************************
+  * * Function            : add_to_wishlist
+  * * Description         : add product in the wishlist
+  * * Input Parameters    : data
+  * * Return Values       :  true or false
+  * ****************************************************************************** */
+  public function add_to_wishlist($data){
+    $query=$this->db->insert('bkd_wishlist',$data);
+    if($this->db->affected_rows()==1)
+    {
+      return $this->db->insert_id();
+    }
+    else
+    {
+      return false;
+    }
+  }
+
+
+
+
+  /********************************************************************************
+  * * Function            : select_wishlist
+  * * Description         : select wishlist details
+  * * Input Parameters    : where condition
+  * * Return Values       :  true or false
+  * ****************************************************************************** */
+  public function select_wishlist($where){
+    $this->db->where($where);
+    $query=$this->db->get('bkd_wishlist')->result_array();
+    return $query;
+  }
+
+
+  /********************************************************************************
+  * * Function            : delete_wishlist
+  * * Description         : delete wishlist details
+  * * Input Parameters    :  where
+  * * Return Values       :  true or false
+  * ****************************************************************************** */
+  public function delete_wishlist($where){
+    $query=$this->db->delete('bkd_wishlist', $where);
+    return $query;
+  }
+
 }
 
 

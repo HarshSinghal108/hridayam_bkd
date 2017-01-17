@@ -246,6 +246,126 @@ Class Shopping extends CI_CONTROLLER {
 
     }
 
+    /********************************************************************************
+    * * Function            : add to wishlist
+    * * Description         : product are added  to wishlist of the user
+    * * Input Parameters    : product_id
+    * * Return Values       :  true or false(JSON)
+    * ****************************************************************************** */
+    public function add_to_wishlist(){
+      if(!$user_id=$this->session->userdata('user_id')){//check if someone is allready logged in or not
+        $this->gm->send_response(false,'Session_Expired','','');
+      }
+
+      //take input
+      $data = file_get_contents("php://input");
+      $data = json_decode($data, TRUE);
+
+      //check empty fields
+      if(empty($data['product_id'])){
+        $this->gm->send_response(false,"Empty_Field",'',$data);
+      }
+
+      //bind data
+      $product_id=$data['product_id'];
+
+      //check if product is allready in wishlist or not
+      $where_wishlist=array('product_id'=>$product_id,'user_id'=>$user_id);
+      $response=$this->sm->select_wishlist($where_wishlist);
+      if(count($response)){
+        $this->gm->send_response(True,'Success','',$response[0]['wishlist_id']);
+      }
+
+      //check if product id exist or not
+      $where_product=array('product_id'=>$product_id,'product_status'=>1);
+      $response=$this->pm->check_product_exists($where_product);
+      if(!$response){
+        $this->gm->send_response(false,'Invalid_Product','',$data['product_id']);
+      }
+
+      //bind data for db
+      $insert_data = array(
+        'user_id'=>$user_id,
+        'product_id' =>$product_id ,
+        'wishlist_added_on'=>time()
+      );
+
+      //insert product in to db
+      $response=$this->sm->add_to_wishlist($insert_data);
+      if($response){
+        $this->gm->send_response(true,'Success','',$response);
+      }
+      else {
+        $this->gm->send_response(false,'Some_Error_Occured','somme_error_occured_while_inserting_data','');
+      }
+    }
+
+    /********************************************************************************
+    * * Function            : delete wishlist
+    * * Description         : product are deleted from the wishlist
+    * * Input Parameters    : wishlist_id
+    * * Return Values       :  true or false(JSON)
+    * ****************************************************************************** */
+    public function delete_wishlist(){
+      if(!$user_id=$this->session->userdata('user_id')){//check if someone is allready logged in or not
+        $this->gm->send_response(false,'Session_Expired','','');
+      }
+
+      //take input
+      $data = file_get_contents("php://input");
+      $data = json_decode($data, TRUE);
+
+      //check empty fields
+      if(empty($data['wishlist_id'])){
+        $this->gm->send_response(false,"Empty_Field",'',$data);
+      }
+
+      //bind data
+      $wishlist_id=$data['wishlist_id'];
+
+      //check if cart id is authentic or not
+      $where_wishlist=array('wishlist_id'=>$wishlist_id,'user_id'=>$user_id);
+      $response=$this->sm->select_wishlist($where_wishlist);
+      if(!count($response)){
+        $this->gm->send_response(false,'Invalid_wishlist_Id','',$wishlist_id);
+      }
+
+      //delete from cart
+      $where_wishlist=array('wishlist_id'=>$wishlist_id);
+      $response=$this->sm->delete_wishlist($where_wishlist);
+      if($response){
+        $this->gm->send_response(true,'Success','','');
+      }
+      else {
+        $this->gm->send_response(false,'Some_Error_Occured','somme_error_occured_while_deleting_data','');
+      }
+    }
+
+
+    /********************************************************************************
+    * * Function            : delete wishlist
+    * * Description         : product are deleted from the wishlist
+    * * Input Parameters    :
+    * * Return Values       :  true or false(JSON)
+    * ****************************************************************************** */
+    public function delete_all_wishlist(){
+      if(!$user_id=$this->session->userdata('user_id')){//check if someone is allready logged in or not
+        $this->gm->send_response(false,'Session_Expired','','');
+      }
+
+      //delete from cart
+      $where_wishlist=array('user_id'=>$user_id);
+      $response=$this->sm->delete_wishlist($where_wishlist);
+      if($response){
+        $this->gm->send_response(true,'Success','','');
+      }
+      else {
+        $this->gm->send_response(false,'Some_Error_Occured','somme_error_occured_while_deleting_data','');
+      }
+    }
+
+
+
 }
 
 ?>

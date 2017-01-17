@@ -76,6 +76,41 @@ Class user extends CI_CONTROLLER {
   }
 
 
+  public function add_survey(){
+    //$this->session->unset_userdata('user_id');
+    if(!($user_id = $this->session->userdata('user_id')))
+    {
+      $this->gm->send_response(false,'Please_Add_User_First','','');
+    }
+
+    $data = file_get_contents("php://input");
+    $data = json_decode($data, TRUE);
+
+    if(isset($data['product_id']) && isset($data['brand'])&& isset($data['quantity']) && isset($data['size']))
+    {
+      $survey_data=array(
+        'user_id'=>$user_id,
+        'product_id'=>$data['product_id'],
+        'brand'=>$data['brand'],
+        'size'=>$data['size'],
+        'quantity'=>$data['quantity'],
+        'added_on'=>time()
+      );
+      $bf_id=$this->um->add_survey($survey_data);
+
+      if(!$bf_id)
+      {
+        $this->gm->send_response(false,'Please_Try_Again','','');
+      }
+
+      $this->gm->send_response(true,'Success','',$bf_id);
+    }
+    else
+    {
+      $this->gm->send_response(false,'Empty_Field','','');
+    }
+  }
+
 
   /********************************************************************************
    * * Function            : Signup

@@ -150,4 +150,20 @@ class User_model extends CI_MODEL
   }
 
 
+  public function add_survey($data)
+  {
+      $query=$this->db->insert('bkd_survey',$data);
+      if($this->db->affected_rows()==1)
+      {
+        return $this->db->insert_id();
+      }
+      else
+      {
+        return false;
+      }
+
+  }
+
+
+
 }
