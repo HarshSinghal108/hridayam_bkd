@@ -38,7 +38,7 @@
          alert('success');
        }
         else {
-          alert(response.data.message);
+          alert(response.data.msg);
         }
        }, function myError(response) {
          console.error(response);
@@ -62,7 +62,7 @@
        alert('success');
      }
       else {
-        alert(response.data.message);
+        alert(response.data.msg);
       }
 
      }, function myError(response) {
@@ -90,7 +90,7 @@
          alert('success');
        }
         else {
-          alert(response.data.message);
+          alert(response.data.msg);
         }
 
        }, function myError(response) {
@@ -122,7 +122,7 @@
           alert('success');
         }
          else {
-           alert(response.data.message);
+           alert(response.data.msg);
          }
        }, function myError(response) {
          console.error(response);
