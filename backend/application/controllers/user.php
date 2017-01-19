@@ -26,7 +26,8 @@ Class user extends CI_CONTROLLER {
       if($flag){
         $this->gm->send_response(false,'User_Exists','','');
       }
-      $user_data=array('user_email'=>$data['email'],'user_first_name'=>$data['first_name'],'user_last_name'=>$data['last_name'],'user_mobile'=>$data['mobile'],'user_telephone'=>$data['telephone'],'user_gender'=>$data['gender'],'user_dob'=>$data['dob'],'user_dom'=>$data['dom'],'user_added_on'=>time(),'user_updated_on'=>time());
+      $referalCode=$data['first_name'].rand(99999,10000);
+      $user_data=array('user_email'=>$data['email'],'user_referal_code'=>$referalCode,'user_salutation'=>$data['salutation'],'user_first_name'=>$data['first_name'],'user_last_name'=>$data['last_name'],'user_mobile'=>$data['mobile'],'user_telephone'=>$data['telephone'],'user_gender'=>$data['gender'],'user_dob'=>$data['dob'],'user_dom'=>$data['dom'],'user_added_on'=>time(),'user_updated_on'=>time());
       $user_id=$this->um->add_user($user_data);
 
       if(!$user_id){
@@ -111,7 +112,26 @@ Class user extends CI_CONTROLLER {
     }
   }
 
+  /********************************************************************************
+  * * Function            : is_user_loggedin
+  * * Description         : check if user is logged in or not
+  * * Input Parameters    :
+  * * Return Values       : user data
+  * ****************************************************************************** */
+    public function is_user_loggedin(){
+      if(!($user_id = $this->session->userdata('user_id'))){
+        $this->gm->send_response(false,'No_Session','','');
+      }
 
+      $where_user = array('user_id' => $user_id );
+      $response=$this->um->select_user($where_user);
+      if(count($response)){
+        $this->gm->send_response(true,"Session_Exist",'',$response[0]);
+      }
+      else {
+          $this->gm->send_response(false,"Some_Error_Occured",'','');
+      }
+    }
   /********************************************************************************
   * * Function            : Signup
   * * Description         : Signup module

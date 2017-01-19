@@ -4,8 +4,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://rawgithub.com/gsklee/ngStorage/master/ngStorage.js"></script>
   <script type="text/javascript" src="angular.min.js"></script>
   <script type="text/javascript" src="app.js"></script>
   <link rel="stylesheet" href="css/style.css">  <style>
@@ -28,7 +28,7 @@
     <ul class="nav nav-tabs nav-justified">
       <li ><a href="home.html">Home</a></li>
       <li><a href="order.html">Order option</a></li>
-      <li><a href="feature.html">Specail feature</a></li>
+      <li><a href="feature.html">Special feature</a></li>
       <li  class="active"><a href="customer.html">Customer</a></li>
       <li><a href="feedback.html">Feedback</a></li>
       <li><a href="survey.html">Survey</a></li>
@@ -49,6 +49,13 @@
     </div>
     <div class="col-xs-4">
       <form name="customerForm" ng-submit="addCustomer()">
+
+        <div class="form-group">
+          <label class="radio-inline"><input type="radio" value="Mr" ng-model="user.salutation">Mr.</label>
+          <label class="radio-inline"><input type="radio" value="Miss" ng-model="user.salutation">Miss.</label>
+          <label class="radio-inline"><input type="radio" value="Mrs" ng-model="user.salutation">Mrs.</label>
+        </div>
+
         <div class="form-group">
           <label for="fname">First Name:</label>
           <input type="text" class="form-control" id="fname" ng-model="user.fname">
@@ -61,9 +68,31 @@
 
         <div class="form-group">
           <label for="gender">Gender:</label><br>
-          <label class="radio-inline"><input type="radio" value="male" ng-model="user.gender">Option 1</label>
-          <label class="radio-inline"><input type="radio" value="female" ng-model="user.gender">Option 2</label>
+          <label class="radio-inline"><input type="radio" value="male" ng-model="user.gender">Male</label>
+          <label class="radio-inline"><input type="radio" value="female" ng-model="user.gender">Female</label>
         </div>
+
+        <div class="form-group">
+          <label for="sel1">Select building type:</label>
+          <select class="form-control" id="sel1" ng-model="user.buildingType">
+            <option>Block</option>
+            <option>Appartment</option>
+            <option>Area</option>
+            <option>House</option>
+            <option>Flat</option>
+            <option>Suit</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="address">{{user.buildingType }} Number:</label>
+          <input type="text" class="form-control" id="flat" ng-model="user.number">
+        </div>
+
+        <!-- <div class="form-group">
+          <label for="address">Area</label>
+          <input type="text" class="form-control" id="area" ng-model="user.area">
+        </div> -->
 
         <div class="form-group">
           <label for="address">Address:</label>
@@ -127,12 +156,13 @@
 
         <button type="submit" class="btn btn-default">Submit</button>
 
+        <button href="feedback.html" class="btn btn-success survey_button">Go to Feedback</button>
       </form>
-      </div>
-      <div class="col-xs-4">
-      </div>
+    </div>
+    <div class="col-xs-4">
+    </div>
 
-</div>
+  </div>
 </div>
 
 <div class="row footer">

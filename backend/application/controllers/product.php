@@ -101,7 +101,22 @@ Class product extends CI_CONTROLLER {
       $this->gm->send_response(false,'Empty_Field','','Product');
     }
 
-    $where_product = array('' => , );
-    $response=$this->pm->select_product()
+    $select = array();//select array
+    $where=array("product_id"=>$product_id);//where condition
+    $response=$this->pm->select_product($select,$where);//fetch from db
+    if(count($response)){//if product found
+
+      if($response[0]['product_status']!=1)//if product is not active
+        $this->gm->send_response(false,"Product_Deleted",'','');
+
+      if ($response[0]['product_quantity_in_stock']==0)//if product is out of stock
+        $this->gm->send_response(false,"Product_Out_Of_Stock",'',$response[0]);
+
+      $this->gm->send_response(false,"Success",'',$response[0]);//success
+    }
+    else {
+      $this->gm->send_response(false,"Product_Not_Found",'','');//invalid product id
+    }
+
   }
 }

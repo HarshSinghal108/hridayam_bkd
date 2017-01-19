@@ -9,12 +9,13 @@
     $scope.addCustomer=function(){
       $scope.data={
         'email':$scope.user.email,
+        'salutation':$scope.user.salutation,
         'first_name':$scope.user.fname,
         'last_name':$scope.user.lname,
         'mobile':$scope.user.mobile,
         'telephone':$scope.user.telephone,
         'gender':$scope.user.gender,
-        'address':$scope.user.address,
+        'address':$scope.user.buildingType+","+$scope.user.number+","+$scope.user.address,
         'city':$scope.user.city,
         'district':$scope.user.district,
         'state':$scope.user.state,
@@ -25,11 +26,11 @@
         'dom':$scope.user.anvr
       };
 
-      // console.log(JSON.stringify($scope.data));
+      console.log(JSON.stringify($scope.data));
 
       $http({
         method  : 'POST',
-        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user",
+        url     : "http://localhost/bkd/backend/index.php/user/add_user",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
        }).then(function mySucces(response) {
@@ -50,18 +51,24 @@
   app.controller('Feedback', function($scope, $http) {
 
     $scope.user={};
-
+    $scope.loggedIn=0;
+    $scope.customer={};
     $http({
       method  : 'POST',
-      url     : "http://www.baniyekidukaan.in/backend/index.php/user/is_logged_in",
+      url     : "http://localhost/bkd/backend/index.php/user/is_user_loggedin",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
      }).then(function mySucces(response) {
       //  console.log(JSON.stringify(response));
       if(response.data.status==true){
+        $scope.loggedIn=1;
+        console.log($scope.loggedIn);
+        $scope.customer.customerId=response.data.data.user_id;
+        $scope.customer.referalCode=response.data.data.user_referal_code;
        alert('success');
      }
       else {
+        $scope.loggedIn=0;
         alert(response.data.msg);
       }
 
@@ -97,6 +104,11 @@
          console.error(response);
        });
     };
+
+
+    $scope.isLoggedIn=function() {
+      return $scope.loggedIn;
+    }
   });
 
 
