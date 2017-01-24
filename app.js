@@ -33,17 +33,17 @@
         url     : "http://localhost/bkd/backend/index.php/user/add_user",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-       }).then(function mySucces(response) {
+      }).then(function mySucces(response) {
         //  console.log(JSON.stringify(response));
         if(response.data.status==true){
-         alert('success');
-       }
+          alert('success');
+        }
         else {
           alert(response.data.msg);
         }
-       }, function myError(response) {
-         console.error(response);
-       });
+      }, function myError(response) {
+        console.error(response);
+      });
     };
   });
 
@@ -58,23 +58,23 @@
       url     : "http://localhost/bkd/backend/index.php/user/is_user_loggedin",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-     }).then(function mySucces(response) {
+    }).then(function mySucces(response) {
       //  console.log(JSON.stringify(response));
       if(response.data.status==true){
         $scope.loggedIn=1;
         console.log($scope.loggedIn);
         $scope.customer.customerId=response.data.data.user_id;
         $scope.customer.referalCode=response.data.data.user_referal_code;
-       alert('success');
-     }
+        alert('success');
+      }
       else {
         $scope.loggedIn=0;
         alert(response.data.msg);
       }
 
-     }, function myError(response) {
-       console.error(response);
-     });
+    }, function myError(response) {
+      console.error(response);
+    });
 
 
     $scope.addFeedback=function(){
@@ -84,25 +84,25 @@
         'shopping_schedule':$scope.schedule,
         'feedback':$scope.feedback,
         'suggestion':$scope.suggestion,
-        };
+      };
 
       $http({
         method  : 'POST',
         url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user_feedback",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-       }).then(function mySucces(response) {
+      }).then(function mySucces(response) {
         //  console.log(JSON.stringify(response));
         if(response.data.status==true){
-         alert('success');
-       }
+          alert('success');
+        }
         else {
           alert(response.data.msg);
         }
 
-       }, function myError(response) {
-         console.error(response);
-       });
+      }, function myError(response) {
+        console.error(response);
+      });
     };
 
 
@@ -122,27 +122,79 @@
         'quantity':$scope.quantity,
         'brand':$scope.brand,
         'size':$scope.size
-        };
+      };
 
       $http({
         method  : 'POST',
         url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_survey",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-       }).then(function mySucces(response) {
-         if(response.data.status==true){
+      }).then(function mySucces(response) {
+        if(response.data.status==true){
           alert('success');
         }
-         else {
-           alert(response.data.msg);
-         }
-       }, function myError(response) {
-         console.error(response);
-       });
+        else {
+          alert(response.data.msg);
+        }
+      }, function myError(response) {
+        console.error(response);
+      });
     };
   });
 
 
 
+  app.controller('add_product', function($scope, $http) {
+    $scope.number=1;
+    $scope.getNumber=function(num){
+      return new Array(num);
+    }
 
-  })();
+    $scope.increase_count=function(){
+      $scope.number=$scope.number+1;
+    }
+
+    $scope.addProduct=function(){
+      $scope.data={'details':[],'product_name':'','category_id':''};
+      for (var i = 0; i < $scope.number; i++) {
+        $scope.data.details[i]={
+          'weight':document.getElementsByName('weight'+i)[0].value,
+          'price':document.getElementsByName('price'+i)[0].value,
+          'packing':document.getElementsByName('packing'+i)[0].value,
+          'piece':document.getElementsByName('piece'+i)[0].value,
+          'type':document.getElementsByName('type'+i)[0].value,
+        }
+        console.log(JSON.stringify($scope.data));
+
+      }
+      $scope.data.product_name=document.getElementsByName('product_name')[0].value;
+        // 'product_name':,
+        $scope.data.category_id=localStorage.getItem("categoryId")
+        console.log(JSON.stringify($scope.data));
+        $http({
+          method  : 'POST',
+          url     : "http://www.baniyekidukaan.in/backend/index.php/product/add_product",
+          data    : $scope.data, //forms user object
+          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+        }).then(function mySucces(response) {
+          if(response.data.status==true){
+            alert('success');
+          }
+          else {
+            alert(response.data.msg);
+          }
+        }, function myError(response) {
+          console.error(response);
+        });
+    }
+
+    $scope.setCategory=function(categoryId){
+      $scope.category=categoryId;
+      console.log($scope.category);
+    }
+
+  });
+
+
+
+})();
