@@ -92,7 +92,7 @@ $('.parent').click(function(){
 
 
 
-	$('#category').append('<a class="list-group-item" ><span ng-click="setCategory(\'' + parseJson.data.category[i].category_id + '\')" onclick="getSubCategory(\'' + sub_id + '\',\'' + parseJson.data.category[i].category_id + '\')" data-toggle="collapse" data-target="#'+sub_id+'" data-parent="#menu" class="maincategory">'+parseJson.data.category[i].category_name+'</span><i title="Add Product" onclick="product_add_modal(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i><i title="Add Category" onclick="add_sub_category(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i></a><div id='+sub_id+' class="sublinks collapse"><a class="list-group-item small"></a>')
+	$('#category').append('<a class="list-group-item" ><span ng-click="setCategory(\'' + parseJson.data.category[i].category_id + '\')" onclick="getSubCategory(\'' + sub_id + '\',\'' + parseJson.data.category[i].category_id + '\')" data-toggle="collapse" data-target="#'+sub_id+'" data-parent="#menu" class="maincategory">'+parseJson.data.category[i].category_name+'</span><i title="Add Category" onclick="add_sub_category(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i><i title="Add Product" onclick="product_add_modal(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i></a><div id='+sub_id+' class="sublinks collapse"><a class="list-group-item small"></a>')
 
 
 

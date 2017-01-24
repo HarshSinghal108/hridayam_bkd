@@ -179,6 +179,7 @@
         }).then(function mySucces(response) {
           if(response.data.status==true){
             alert('success');
+            $("#myModal2").modal('hide');
           }
           else {
             alert(response.data.msg);
