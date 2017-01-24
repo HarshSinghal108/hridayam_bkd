@@ -20,14 +20,28 @@ Class product extends CI_CONTROLLER {
 
 	}
 
+	// {"0":{"weight":"24","price":"50","packing":"open","piece":"5","type":"branded"},"1":{"weight":"48","price":"75","packing":"open","piece":"10","type":"branded"},"product_name":"product name"}
+
 	public function add_product(){
 
 
 		$data = file_get_contents("php://input");
 		$data = json_decode($data, TRUE);
 
+
 		if(isset($data['product_name']) && isset($data['category_id']))
 		{
+
+			for($i=0;$i<count($data['details']);$i++)
+			{
+
+				if(sizeof($data['details'][$i])==0)
+				{
+					
+					$this->gm->send_response(false,'Empty_Field','','');
+				}
+			}
+
 
 
 			$cat_where=array('category_id'=>$data['category_id']);
@@ -49,6 +63,17 @@ Class product extends CI_CONTROLLER {
 			{
 				$prod_data=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id'],'product_category_id'=>$cat[0]['category_parent_id'],'product_added_on'=>time(),'product_updated_on'=>time());
 				$product_id=$this->pm->add_product($prod_data);
+
+				for($i=0;$i<count($data['details']);$i++)
+				{
+
+				$prod_data1=array('bsp_product_id'=>$product_id,'bsp_weight'=>$data['details'][$i]['weight'],'bsp_type'=>$data['details'][$i]['type'],'bsp_price'=>$data['details'][$i]['price'],'bsp_packing'=>$data['details'][$i]['packing'],'bsp_piece'=>$data['details'][$i]['piece'],'bsp_added_on'=>time(),'bsp_updated_on'=>time());
+				$this->pm->add_sub_product($prod_data1);
+				}
+
+
+
+
 				$this->gm->send_response(true,'Success','',$product_id);
 			}
 		}

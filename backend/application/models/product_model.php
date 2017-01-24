@@ -41,6 +41,20 @@ class Product_model extends CI_MODEL
         }
     }
 
+
+    public function add_sub_product($data)
+    {
+        $query=$this->db->insert('bkd_sub_product',$data);
+        if($this->db->affected_rows()==1)
+        {
+            return $this->db->insert_id();
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     public function get_product($where)
     {
         $arr=array();
