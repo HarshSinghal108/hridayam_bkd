@@ -42,6 +42,12 @@ class Category_model extends CI_MODEL
         }
     }
 
+public function edit_category($data,$where)
+        {
+            $query=$this->db->where($where)->update('bkd_category',$data);
+            return true;
+        }
+
     public function get_category($where)
     {
         $arr=array();
