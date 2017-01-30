@@ -92,7 +92,7 @@ $('.parent').click(function(){
 
 
 
-	$('#category').append('<a class="list-group-item" ><span onclick="getSubCategory(\'' + sub_id + '\',\'' + parseJson.data.category[i].category_id + '\')" data-toggle="collapse" data-target="#'+sub_id+'" data-parent="#menu" class="maincategory">'+parseJson.data.category[i].category_name+'</span><i title="Add Product" onclick="product_add_modal(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i><i title="Add Category" onclick="add_sub_category(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i></a><div id='+sub_id+' class="sublinks collapse"><a class="list-group-item small"></a>')
+	$('#category').append('<a class="list-group-item" ><span ng-click="setCategory(\'' + parseJson.data.category[i].category_id + '\')" onclick="getSubCategory(\'' + sub_id + '\',\'' + parseJson.data.category[i].category_id + '\')" data-toggle="collapse" data-target="#'+sub_id+'" data-parent="#menu" class="maincategory">'+parseJson.data.category[i].category_name+'</span><i title="Add Category" onclick="add_sub_category(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i><i title="Add Product" onclick="product_add_modal(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i></a><div id='+sub_id+' class="sublinks collapse"><a class="list-group-item small"></a>')
 
 
 
@@ -212,7 +212,7 @@ function product_add_modal(obj)
 
 		debugger;
     product_category_id = obj;
-
+    localStorage.setItem("categoryId", obj);
 	$('#myModal2').modal('show');
 }
 
@@ -226,6 +226,9 @@ function add_product()
 
 		var category_id = product_category_id;
 	var product_name = $("#product_name").val();
+  // var product_image = $("#product_image").val();
+  // var product_ = $("#product_name").val();
+  // var product_name = $("#product_name").val();
 
 	dataObj = {
         "product_name": product_name,
