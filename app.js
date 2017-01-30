@@ -254,11 +254,40 @@
       });
     }
 
+    $scope.editCategory=function(){
+      $scope.data={};
+      $scope.data.category_id=localStorage.getItem("categoryId");
+      $scope.data.category_name=document.getElementsByName('categoryName')[0].value
+
+      console.log($scope.data);
+      $http({
+        method  : 'POST',
+        url     : "http://www.baniyekidukaan.in/backend/index.php/category/edit_category",
+        data    : $scope.data, //forms user object
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function mySucces(response) {
+        if(response.data.status==true){
+          alert('success');
+          $scope.subProduct=[];
+          $scope.product_name="";
+          $("#myModal3").modal('hide');
+          window.location.reload();
+
+        }
+        else {
+          alert(response.data.msg);
+        }
+      }, function myError(response) {
+        console.error(response);
+      });
+    }
 
     $scope.setCategory=function(categoryId){
       $scope.category=categoryId;
       console.log('shubh');
     }
+
+
 
   });
 

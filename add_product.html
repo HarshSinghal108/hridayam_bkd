@@ -45,14 +45,14 @@
     font-size: 21px;
     float: right;
     margin-left: 12px;
-    color: #1a82c3;
+    color: #3eb928;
   }
   i.fa.fa-trash-o.tooltip_category {
     cursor: pointer;
     font-size: 21px;
     float: right;
     margin-left: 12px;
-    color: #1a82c3;
+    color: #ea0707;
   }
   .navbar-inverse {
     background-color: #44e2dc;
@@ -75,16 +75,16 @@
 
   i.fa.fa-pencil.tooltip_category.sub {
     font-size: 15px;
-    color: #1a82c3;
+    color: #3eb928;
   }
 
   i.fa.fa-trash-o.tooltip_category.sub {
     font-size: 15px;
-    color: #1a82c3;
+    color: #ea0707;
   }
-  i.fa.fa-support.sup {
+  i.fa.fa-hand-o-right.sup {
     margin-right: 6px;
-    color: red;
+    color: #867e7e;
     font-size: 17px;
   }
   span.subcategory {
@@ -95,7 +95,7 @@
     cursor: pointer;
     color: #1a82c3;
     font-size: 18px;
-    font-style: italic;
+    font-style: Bold;
   }
 
   button.btn.btn-primary.add {
@@ -131,10 +131,10 @@
   span.listcat1 {
     cursor: pointer;
   }
-.modal-content{
-  width: 150%;
-margin-left: -23%;
-}
+  .modal-content{
+    width: 150%;
+    margin-left: -23%;
+  }
 
 
   </style>
@@ -175,7 +175,7 @@ margin-left: -23%;
       <div class="container category">
         <div class="">
           <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#myModal1" >Add Category</button>
-        </div><h2 style="color: red;font-style: italic;">Category List</h2>
+        </div><h2 style="color: black;font-style: Time;">Category List</h2>
 
         <div id="category">
 
@@ -219,6 +219,39 @@ margin-left: -23%;
 
     </div>
   </div>
+
+
+
+  <!-- Modal content-->
+  <div class="modal fade" id="myModal4" role="dialog">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Category</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" class="form-inline" ng-submit="editCategory()">
+            <div class="form-group">
+              <label for="usr">Category Name:</label>
+              <input type="text" class="form-control" id="product_name" name="categoryName">
+            </div>
+            <br>
+            <br>
+          </div>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary"  style="width: 82px;" value="Edit">
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+
 
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog">
@@ -280,13 +313,13 @@ margin-left: -23%;
               <input class="form-control input-sm" id="inputsm" type="text" name="piece{{$index}}" ng-model="piece" placeholder="Piece">
               <input class="form-control input-sm" id="inputsm" type="text" name="type{{$index}}" ng-model="type" placeholder="Type">
 
-              </div>
+            </div>
             <button type="button" class="btn btn-primary"  ng-click="increase_count()" style="width: 82px;">Add rows</button>
           </div>
-        <div class="modal-footer">
-          <input type="submit" class="btn btn-primary"  style="width: 82px;" value="Add">
-        </div>
-      </form>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary"  style="width: 82px;" value="Add">
+          </div>
+        </form>
       </div>
 
     </div>
@@ -299,7 +332,7 @@ margin-left: -23%;
   <!-- Modal content-->
   <div class="modal fade" id="myModal3" role="dialog">
     <div class="modal-dialog">
-    <!-- Modal content-->
+      <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -322,13 +355,13 @@ margin-left: -23%;
               <input class="form-control input-sm" id="inputsm" type="text" name="editpiece{{$index}}" ng-model="i.bsp_piece" placeholder="Piece">
               <input class="form-control input-sm" id="inputsm" type="text" name="edittype{{$index}}" ng-model="i.bsp_type" placeholder="Type">
 
-              </div>
+            </div>
             <button type="button" class="btn btn-primary"  ng-click="increase_array_count()" style="width: 82px;">Add rows</button>
           </div>
-        <div class="modal-footer">
-          <input type="submit" class="btn btn-primary"  style="width: 82px;" value="Edit">
-        </div>
-      </form>
+          <div class="modal-footer">
+            <input type="submit" class="btn btn-primary"  style="width: 82px;" value="Edit">
+          </div>
+        </form>
       </div>
 
     </div>
