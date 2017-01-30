@@ -63,6 +63,22 @@ class Product_model extends CI_MODEL
         return $arr;
     }
 
+
+    public function edit_product($data,$where)
+    {
+        $query=$this->db->where($where)->update('bkd_product',$data);
+        return true;
+    }
+
+
+    public function delete_sub_product($where)
+    {
+        $query=$this->db->where($where)->delete('bkd_sub_product');
+     
+        return true;
+    }
+
+
     /********************************************************************************
     * * Function            : select_product
     * * Description         : get product details according to select and where array

@@ -84,6 +84,65 @@ Class product extends CI_CONTROLLER {
 	}
 
 
+
+	public function edit_product(){
+
+
+		$data = file_get_contents("php://input");
+		$data = json_decode($data, TRUE);
+
+
+		if(isset($data['product_name']) && isset($data['product_id']))
+		{
+
+			for($i=0;$i<count($data['details']);$i++)
+			{
+
+				if(sizeof($data['details'][$i])==0)
+				{
+					
+					$this->gm->send_response(false,'Empty_Field','','');
+				}
+			}
+
+
+			$prod_where=array('product_id'=>$data['product_id']);
+			$flag=$this->pm->check_product_exists($prod_where);
+
+			if(!$flag)
+			{
+				$this->gm->send_response(false,'Not_Exists','','');
+			}
+			else
+			{
+
+				$prod_data=array('product_name'=>$data['product_name'],'product_updated_on'=>time());
+				$product_id=$this->pm->edit_product($prod_data,$prod_where);
+
+
+				$sub_pro_where=array('bsp_product_id'=>$data['product_id']);
+				$this->pm->delete_sub_product($sub_pro_where);
+
+				for($i=0;$i<count($data['details']);$i++)
+				{
+
+				$prod_data1=array('bsp_product_id'=>$product_id,'bsp_weight'=>$data['details'][$i]['weight'],'bsp_type'=>$data['details'][$i]['type'],'bsp_price'=>$data['details'][$i]['price'],'bsp_packing'=>$data['details'][$i]['packing'],'bsp_piece'=>$data['details'][$i]['piece'],'bsp_added_on'=>time(),'bsp_updated_on'=>time());
+				$this->pm->add_sub_product($prod_data1);
+				}
+
+
+
+
+				$this->gm->send_response(true,'Success','',$product_id);
+			}
+		}
+		else
+		{
+			$this->gm->send_response(false,'Empty_Field','','');
+		}
+	}
+
+
 		public function list_product(){
 
 
@@ -144,4 +203,72 @@ Class product extends CI_CONTROLLER {
     }
 
   }
+
+
+
+	public function add_product_image()
+    {
+        $is_uploaded=$this->upload('prod_image');
+        if($is_uploaded['status'])
+        {
+        	$image_path=$is_uploaded['name'];
+	        $data=array('place_image_place_id'=>$input['place_id'],'place_image_name'=>$input['image_name'],'place_image_path'=>'place_image/'.$image_path,'place_image_added_on'=>time(),'place_image_updated_on'=>time());
+	        $is_added=$this->am->add_place_image($data);
+	        if(! $is_added)
+	        {
+	           $this->send_response(false, 'please_try_later');   
+	        }
+	        $this->send_response(true,'place_image_added');
+    	}
+    	else
+    	{
+    		$this->send_response(false,'please_upload_image');	
+    	}
+    }
+
+
+    public function upload($file)
+    {
+    	if(isset($_FILES[$file]))
+        {
+			
+			$this->load->helper('string');
+        	$rand=random_string('alnum', 4);
+            $name=$rand.'_'.time();
+            $img=$_FILES[$file]['name'];
+            $path_parts = pathinfo($img);   
+            $ext = strtolower($path_parts["extension"]);
+            $path=getcwd();
+            chdir($path);
+            $data=array();
+
+            if( $_FILES[$file]['name']!='' and $_FILES[$file]['size']>0)
+            {
+                $config['upload_path'] = './'.$file;
+                $config['allowed_types'] = 'png|jpg|gif|pdf';
+                //$config['max_size'] = '4096';   
+                //$config['max_width']  = '3500';
+                //$config['max_height']  = '3500';
+
+                $config['file_name'] = $file.'_'.$name.$ext;
+                $this->load->library('upload', $config);
+
+                if(!$this->upload->do_upload($file))
+                {
+                    $error=$this->upload->display_errors('', '');
+                    $this->send_response(false,$error);
+                }
+                return array('status'=>true,'name'=>$file.'_'.$name.$ext);
+            }
+            else
+            {
+                $this->send_response(false,'please_upload_image');
+            }
+        }
+        else
+        {
+            $this->send_response(false,'please_upload_image');
+        }   
+    }
+
 }
