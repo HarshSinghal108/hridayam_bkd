@@ -133,7 +133,7 @@ Class product extends CI_CONTROLLER {
 
 
 
-				$this->gm->send_response(true,'Success','',$product_id);
+				$this->gm->send_response(true,'Success','','');
 			}
 		}
 		else
