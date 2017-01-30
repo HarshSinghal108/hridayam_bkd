@@ -126,7 +126,7 @@ Class product extends CI_CONTROLLER {
 				for($i=0;$i<count($data['details']);$i++)
 				{
 
-				$prod_data1=array('bsp_product_id'=>$product_id,'bsp_weight'=>$data['details'][$i]['weight'],'bsp_type'=>$data['details'][$i]['type'],'bsp_price'=>$data['details'][$i]['price'],'bsp_packing'=>$data['details'][$i]['packing'],'bsp_piece'=>$data['details'][$i]['piece'],'bsp_added_on'=>time(),'bsp_updated_on'=>time());
+				$prod_data1=array('bsp_product_id'=>$data['product_id'],'bsp_weight'=>$data['details'][$i]['weight'],'bsp_type'=>$data['details'][$i]['type'],'bsp_price'=>$data['details'][$i]['price'],'bsp_packing'=>$data['details'][$i]['packing'],'bsp_piece'=>$data['details'][$i]['piece'],'bsp_added_on'=>time(),'bsp_updated_on'=>time());
 				$this->pm->add_sub_product($prod_data1);
 				}
 
