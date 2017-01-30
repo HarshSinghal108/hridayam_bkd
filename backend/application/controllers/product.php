@@ -100,7 +100,7 @@ Class product extends CI_CONTROLLER {
 
 				if(sizeof($data['details'][$i])==0)
 				{
-					
+
 					$this->gm->send_response(false,'Empty_Field','','');
 				}
 			}
@@ -215,7 +215,7 @@ Class product extends CI_CONTROLLER {
       $this->gm->send_response(true,"Success",'',$response);//success
     }
     else {
-      $this->gm->send_response(false,"Product_Not_Found",'','');//invalid product id
+      $this->gm->send_response(false,"Product_Not_Found",$response,'');//invalid product id
     }
 
   }
@@ -232,13 +232,13 @@ Class product extends CI_CONTROLLER {
 	        $is_added=$this->am->add_place_image($data);
 	        if(! $is_added)
 	        {
-	           $this->send_response(false, 'please_try_later');   
+	           $this->send_response(false, 'please_try_later');
 	        }
 	        $this->send_response(true,'place_image_added');
     	}
     	else
     	{
-    		$this->send_response(false,'please_upload_image');	
+    		$this->send_response(false,'please_upload_image');
     	}
     }
 
@@ -247,12 +247,12 @@ Class product extends CI_CONTROLLER {
     {
     	if(isset($_FILES[$file]))
         {
-			
+
 			$this->load->helper('string');
         	$rand=random_string('alnum', 4);
             $name=$rand.'_'.time();
             $img=$_FILES[$file]['name'];
-            $path_parts = pathinfo($img);   
+            $path_parts = pathinfo($img);
             $ext = strtolower($path_parts["extension"]);
             $path=getcwd();
             chdir($path);
@@ -262,7 +262,7 @@ Class product extends CI_CONTROLLER {
             {
                 $config['upload_path'] = './'.$file;
                 $config['allowed_types'] = 'png|jpg|gif|pdf';
-                //$config['max_size'] = '4096';   
+                //$config['max_size'] = '4096';
                 //$config['max_width']  = '3500';
                 //$config['max_height']  = '3500';
 
@@ -284,7 +284,7 @@ Class product extends CI_CONTROLLER {
         else
         {
             $this->send_response(false,'please_upload_image');
-        }   
+        }
     }
 
 }
