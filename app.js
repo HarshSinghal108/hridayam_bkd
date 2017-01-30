@@ -154,6 +154,11 @@
       $scope.number=$scope.number+1;
     }
 
+    $scope.increase_array_count=function(){
+      $scope.subProduct[$scope.subProduct.length]=[];
+    }
+
+
     $scope.addProduct=function(){
       $scope.data={'details':[],'product_name':'','category_id':''};
       for (var i = 0; i < $scope.number; i++) {
