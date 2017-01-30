@@ -205,6 +205,25 @@ Class product extends CI_CONTROLLER {
     $where=array("product_id"=>$product_id);//where condition
     $response=$this->pm->select_product($select,$where);//fetch from db
     if(count($response)){//if product found
+      $this->gm->send_response(true,"Success",'',$response);//success
+    }
+    else {
+      $this->gm->send_response(false,"Product_Not_Found",$response,'');//invalid product id
+    }
+
+  }
+
+  public function get_product_details2($product_id){
+
+    //check empty fields
+    if (empty($product_id)) {
+      $this->gm->send_response(false,'Empty_Field','','Product');
+    }
+
+    $select = array();//select array
+    $where=array("product_id"=>$product_id);//where condition
+    $response=$this->pm->select_product($select,$where);//fetch from db
+    if(count($response)){//if product found
 
       if($response[0]['product_status']!=1)//if product is not active
         $this->gm->send_response(false,"Product_Deleted",'','');

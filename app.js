@@ -154,6 +154,11 @@
       $scope.number=$scope.number+1;
     }
 
+    $scope.increase_array_count=function(){
+      $scope.subProduct[$scope.subProduct.length]=[];
+    }
+
+
     $scope.addProduct=function(){
       $scope.data={'details':[],'product_name':'','category_id':''};
       for (var i = 0; i < $scope.number; i++) {
@@ -215,7 +220,7 @@
 
     $scope.editProduct=function(){
       $scope.data={'details':[],'product_name':'','product_id':''};
-      for (var i = 0; i < $scope.number; i++) {
+      for (var i = 0; i < $scope.subProduct.length; i++) {
         $scope.data.details[i]={
           'weight':document.getElementsByName('editweight'+i)[0].value,
           'price':document.getElementsByName('editprice'+i)[0].value,
@@ -236,7 +241,10 @@
       }).then(function mySucces(response) {
         if(response.data.status==true){
           alert('success');
-          $("#myModal2").modal('hide');
+          $scope.subProduct=[];
+          $scope.product_name="";
+          $("#myModal3").modal('hide');
+
         }
         else {
           alert(response.data.msg);
