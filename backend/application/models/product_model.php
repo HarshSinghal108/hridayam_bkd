@@ -74,7 +74,7 @@ class Product_model extends CI_MODEL
     public function delete_sub_product($where)
     {
         $query=$this->db->where($where)->delete('bkd_sub_product');
-     
+
         return true;
     }
 
@@ -87,7 +87,7 @@ class Product_model extends CI_MODEL
     * ****************************************************************************** */
     public function select_product($select,$where)  {
         $sql="SELECT * FROM `bkd_product` BP INNER JOIN `bkd_sub_product` BSP ON `product_id`=`bsp_product_id`
-              WHERE `product_id`='".$where['product_id']."' AND `product_status`=1";
+              WHERE `product_id`='".$where['product_id']."'";
               // echo $sql;
         $query=$this->db->query($sql);
         $arr=$query->result_array();
