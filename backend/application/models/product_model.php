@@ -86,7 +86,7 @@ class Product_model extends CI_MODEL
     * * Return Values       : product details
     * ****************************************************************************** */
     public function select_product($select,$where)  {
-        $sql="SELECT * FROM `bkd_product` BP INNER JOIN `bkd_sub_product` BSP ON `product_id`=`bsp_product_id`
+        $sql="SELECT * FROM `bkd_product` BP LEFT JOIN `bkd_sub_product` BSP ON `product_id`=`bsp_product_id`
               WHERE `product_id`='".$where['product_id']."'";
               // echo $sql;
         $query=$this->db->query($sql);
