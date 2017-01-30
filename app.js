@@ -30,7 +30,7 @@
 
       $http({
         method  : 'POST',
-        url     : "http://www.baniyekidukaan.com/backend/index.php/user/add_user",
+        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
@@ -55,7 +55,7 @@
     $scope.customer={};
     $http({
       method  : 'POST',
-      url     : "http://www.baniyekidukaan.com/backend/index.php/user/is_user_loggedin",
+      url     : "http://www.baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -195,7 +195,7 @@
       $scope.productId=localStorage.getItem("productId")
       $http({
         method  : 'POST',
-        url     : "http://www.baniyekidukaan.com/backend/index.php/product/get_product_details/"+$scope.productId,
+        url     : "http://www.baniyekidukaan.in/backend/index.php/product/get_product_details/"+$scope.productId,
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
