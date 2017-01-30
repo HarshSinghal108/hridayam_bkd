@@ -30,7 +30,7 @@
 
       $http({
         method  : 'POST',
-        url     : "http://localhost/bkd/backend/index.php/user/add_user",
+        url     : "http://www.baniyekidukaan.com/backend/index.php/user/add_user",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
@@ -55,7 +55,7 @@
     $scope.customer={};
     $http({
       method  : 'POST',
-      url     : "http://localhost/bkd/backend/index.php/user/is_user_loggedin",
+      url     : "http://www.baniyekidukaan.com/backend/index.php/user/is_user_loggedin",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -168,30 +168,88 @@
 
       }
       $scope.data.product_name=document.getElementsByName('product_name')[0].value;
-        // 'product_name':,
-        $scope.data.category_id=localStorage.getItem("categoryId")
-        console.log(JSON.stringify($scope.data));
-        $http({
-          method  : 'POST',
-          url     : "http://www.baniyekidukaan.in/backend/index.php/product/add_product",
-          data    : $scope.data, //forms user object
-          headers : {'Content-Type': 'application/x-www-form-urlencoded'}
-        }).then(function mySucces(response) {
-          if(response.data.status==true){
-            alert('success');
-            $("#myModal2").modal('hide');
-          }
-          else {
-            alert(response.data.msg);
-          }
-        }, function myError(response) {
-          console.error(response);
-        });
+      // 'product_name':,
+      $scope.data.category_id=localStorage.getItem("categoryId")
+      console.log(JSON.stringify($scope.data));
+      $http({
+        method  : 'POST',
+        url     : "http://www.baniyekidukaan.in/backend/index.php/product/add_product",
+        data    : $scope.data, //forms user object
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function mySucces(response) {
+        if(response.data.status==true){
+          alert('success');
+          $("#myModal2").modal('hide');
+        }
+        else {
+          alert(response.data.msg);
+        }
+      }, function myError(response) {
+        console.error(response);
+      });
     }
+
+    $scope.getProduct=function(){
+      $scope.subProduct=[];
+      $scope.product_name;
+      $scope.productId=localStorage.getItem("productId")
+      $http({
+        method  : 'POST',
+        url     : "http://www.baniyekidukaan.com/backend/index.php/product/get_product_details/"+$scope.productId,
+        data    : $scope.data, //forms user object
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function mySucces(response) {
+        if(response.data.status==true){
+           $scope.subProduct=response.data.data;
+           $scope.product_name=$scope.subProduct[0].product_name;
+           $scope.number=$scope.subProduct.length;
+           console.log($scope.subProduct[0].product_name);
+        }
+        else {
+          alert(response.data.msg);
+        }
+      }, function myError(response) {
+        console.error(response);
+      });
+    }
+
+    $scope.editProduct=function(){
+      $scope.data={'details':[],'product_name':'','product_id':''};
+      for (var i = 0; i < $scope.number; i++) {
+        $scope.data.details[i]={
+          'weight':document.getElementsByName('editweight'+i)[0].value,
+          'price':document.getElementsByName('editprice'+i)[0].value,
+          'packing':document.getElementsByName('editpacking'+i)[0].value,
+          'piece':document.getElementsByName('editpiece'+i)[0].value,
+          'type':document.getElementsByName('edittype'+i)[0].value,
+        }
+        }
+      $scope.data.product_name=document.getElementsByName('editproduct_name')[0].value;
+      // 'product_name':,
+      $scope.data.product_id=localStorage.getItem("productId")
+      console.log($scope.data);
+      $http({
+        method  : 'POST',
+        url     : "http://www.baniyekidukaan.in/backend/index.php/product/edit_product",
+        data    : $scope.data, //forms user object
+        headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+      }).then(function mySucces(response) {
+        if(response.data.status==true){
+          alert('success');
+          $("#myModal2").modal('hide');
+        }
+        else {
+          alert(response.data.msg);
+        }
+      }, function myError(response) {
+        console.error(response);
+      });
+    }
+
 
     $scope.setCategory=function(categoryId){
       $scope.category=categoryId;
-      console.log($scope.category);
+      console.log('shubh');
     }
 
   });

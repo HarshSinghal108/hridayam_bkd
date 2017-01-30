@@ -1,5 +1,4 @@
 <html lang="en" ng-app="bkd" ng-controller="add_product">
-
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Meta, title, CSS, favicons, etc. -->
@@ -41,6 +40,20 @@
     margin-left: 12px;
     color: #1a82c3;
   }
+  i.fa.fa-pencil.tooltip_category {
+    cursor: pointer;
+    font-size: 21px;
+    float: right;
+    margin-left: 12px;
+    color: #1a82c3;
+  }
+  i.fa.fa-trash-o.tooltip_category {
+    cursor: pointer;
+    font-size: 21px;
+    float: right;
+    margin-left: 12px;
+    color: #1a82c3;
+  }
   .navbar-inverse {
     background-color: #44e2dc;
     border-color: #44e2dc;
@@ -56,6 +69,16 @@
 
 
   i.fa.fa-plus.tooltip_category.sub {
+    font-size: 15px;
+    color: #1a82c3;
+  }
+
+  i.fa.fa-pencil.tooltip_category.sub {
+    font-size: 15px;
+    color: #1a82c3;
+  }
+
+  i.fa.fa-trash-o.tooltip_category.sub {
     font-size: 15px;
     color: #1a82c3;
   }
@@ -259,16 +282,51 @@ margin-left: -23%;
 
               </div>
             <button type="button" class="btn btn-primary"  ng-click="increase_count()" style="width: 82px;">Add rows</button>
-
-
-
-
-
-
-
-        </div>
+          </div>
         <div class="modal-footer">
           <input type="submit" class="btn btn-primary"  style="width: 82px;" value="Add">
+        </div>
+      </form>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+
+  <!-- Modal content-->
+  <div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Edit Product</h4>
+        </div>
+        <div class="modal-body">
+          <form role="form" class="form-inline" ng-submit="editProduct()">
+            <div class="form-group">
+              <label for="usr">Product Name:</label>
+              <input type="text" class="form-control" id="product_name" ng-model="product_name" name="editproduct_name">
+            </div>
+            <button type="button" class="btn btn-primary"  ng-click="getProduct()" style="width: 85px;">Get Details</button>
+            <br>
+            <br>
+
+            <div ng-repeat="i in subProduct track by $index">
+              <input class="form-control input-sm" id="inputsm" type="text" name="editweight{{$index}}" ng-model="i.bsp_weight" value={i.bsp_weight} placeholder="Wieght">
+              <input class="form-control input-sm" id="inputsm" type="text" name="editprice{{$index}}" ng-model="i.bsp_price" placeholder="Price">
+              <input class="form-control input-sm" id="inputsm" type="text" name="editpacking{{$index}}" ng-model="i.bsp_packing" placeholder="Packing">
+              <input class="form-control input-sm" id="inputsm" type="text" name="editpiece{{$index}}" ng-model="i.bsp_piece" placeholder="Piece">
+              <input class="form-control input-sm" id="inputsm" type="text" name="edittype{{$index}}" ng-model="i.bsp_type" placeholder="Type">
+
+              </div>
+            <button type="button" class="btn btn-primary"  ng-click="increase_count()" style="width: 82px;">Add rows</button>
+          </div>
+        <div class="modal-footer">
+          <input type="submit" class="btn btn-primary"  style="width: 82px;" value="Edit">
         </div>
       </form>
       </div>

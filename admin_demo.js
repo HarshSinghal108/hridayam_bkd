@@ -1,6 +1,7 @@
 var sub_category;
 var sub_category_list;
 var product_category_id;
+// var app = require('app.js');
 
 $('.parent').click(function(){
         $('.sub-nav').toggle();
@@ -10,16 +11,27 @@ $('.parent').click(function(){
 
 	function add_sub_category(sub_category1)
 	{
-		debugger;
     sub_category = sub_category1;
 
 	$('#myModal').modal('show');
 	}
 
-	//add category
+  function edit_product(productId){
+    localStorage.setItem("productId",productId);
+    console.log(productId);
+    $('#myModal3').modal('show');
+	}
 
-   function add_category(category)
-   {
+  function delete_product(productId){
+    var dataObj={};
+    callAjax('product/delete_product/'+productId, 'POST', dataObj, delete_product_result );
+  }
+  function delete_product_result(result) {
+    window.location.reload();
+  }
+
+  //add category
+  function add_category(category){
    debugger;
   // alert(category);
 
@@ -157,7 +169,7 @@ $('.parent').click(function(){
 		var sub_id_1 = parseJson.data.product[j].product_name + parseJson.data.product[j].product_id;
 
 
-		 $("#"+sub_category_list).append("<a title='Product' class='list-group-item small'><i class='fa fa-support sup'></i><span class='subcategory'   onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.product[j].product_id + "\"); showProduct(\""+parseJson.data.product[j].product_id+"\",\""+parseJson.data.product[j].product_name+"\")'>"+parseJson.data.product[j].product_name+"</span></a>");
+		 $("#"+sub_category_list).append("<a title='Product' class='list-group-item small'><i class='fa fa-support sup'></i><span class='subcategory'  ngTouch='editProduct()'  onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.product[j].product_id + "\"); showProduct(\""+parseJson.data.product[j].product_id+"\",\""+parseJson.data.product[j].product_name+"\")'>"+parseJson.data.product[j].product_name+" </span><i title='EditProduct' ng-click='editProduct()'  onclick='edit_product(\"" + parseJson.data.product[j].product_id + "\")' class='fa fa-pencil tooltip_category' aria-hidden='true'></i><i title='Add Category' onclick='delete_product(\"" + parseJson.data.product[j].product_id + "\")' class='fa fa-trash-o tooltip_category' aria-hidden='true'></i></a>");
 
 
 	    }

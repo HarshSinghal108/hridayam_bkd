@@ -1,4 +1,4 @@
-var basePath = "http://www.baniyekidukaan.in/backend/index.php";
+var basePath = "http://www.baniyekidukaan.com/backend/index.php";
 
 var callAjax=function(url,type,dataObj,callback)
 {
@@ -10,8 +10,8 @@ var callAjax=function(url,type,dataObj,callback)
    }
    if(basePath != "")
        url = basePath + "/"+url;
-       console.log(url);
-       console.log("...................");
+      //  console.log(url);
+      //  console.log("...................");
 			$.ajax({
 
 				type: type,

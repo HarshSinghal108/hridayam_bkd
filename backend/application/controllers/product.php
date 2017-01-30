@@ -37,7 +37,7 @@ Class product extends CI_CONTROLLER {
 
 				if(sizeof($data['details'][$i])==0)
 				{
-					
+
 					$this->gm->send_response(false,'Empty_Field','','');
 				}
 			}
@@ -110,6 +110,22 @@ Class product extends CI_CONTROLLER {
 		}
 	}
 
+  /********************************************************************************
+  * * Function            : delete_product
+  * * Description         : delete product from the db
+  * * Input Parameters    : product_id
+  * * Return Values       :  true or false(JSON)
+  * ****************************************************************************** */
+  public function delete_product($product_id){
+    $where=array("product_id"=>$product_id);
+    $response=$this->pm->delete_product($where);
+    if($response){
+      $this->gm->send_response(true,"Product_Deleted",'','');
+    }
+    else {
+      $this->gm->send_response(false,"Product_Not_Deleted","somme_error_occured_while_deleting_data",'');
+    }
+  }
 
 
   /********************************************************************************
@@ -137,7 +153,7 @@ Class product extends CI_CONTROLLER {
       if ($response[0]['product_quantity_in_stock']==0)//if product is out of stock
         $this->gm->send_response(false,"Product_Out_Of_Stock",'',$response[0]);
 
-      $this->gm->send_response(false,"Success",'',$response[0]);//success
+      $this->gm->send_response(true,"Success",'',$response);//success
     }
     else {
       $this->gm->send_response(false,"Product_Not_Found",'','');//invalid product id
