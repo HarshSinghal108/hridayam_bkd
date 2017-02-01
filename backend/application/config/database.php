@@ -54,7 +54,7 @@ $db['default']['password'] = 'baniye@123';
 $db['default']['database'] = 'u448482450_bkd';
 
 // $db['default']['hostname'] = 'localhost';
-// $db['default']['password'] = '';
+// $db['default']['password'] = 'ram';
 // $db['default']['database'] = 'bkd';
 // $db['default']['username'] = 'root';
 
