@@ -29,86 +29,113 @@
     <script src="js/jquery.min.js"></script>
     <script src="config.js"></script>
 
-    <script src="admin_demo.js"></script>
+    <!-- <script src="admin_demo2.js"></script> -->
     <script src="app.js"></script>
 
 
-     <style>
-	i.fa.fa-plus.tooltip_category {
-    cursor: pointer;
-    font-size: 21px;
-    float: right;
-    margin-left: 12px;
-	color: #1a82c3;
-}
-.navbar-inverse {
-    background-color: #44e2dc;
-    border-color: #44e2dc;
-    height: 83px;
-}
-span.glyphicon.glyphicon-chevron-right {
-    margin-right: 10px;
-    font-size: 16px;
-    color: #61d261;
-}
+    <style>
+    i.fa.fa-plus.tooltip_category {
+      cursor: pointer;
+      font-size: 21px;
+      float: right;
+      margin-left: 12px;
+      color: #1a82c3;
+    }
+    i.fa.fa-pencil.tooltip_category {
+      cursor: pointer;
+      font-size: 21px;
+      float: right;
+      margin-left: 12px;
+      color: #3eb928;
+    }
+    i.fa.fa-trash-o.tooltip_category {
+      cursor: pointer;
+      font-size: 21px;
+      float: right;
+      margin-left: 12px;
+      color: #ea0707;
+    }
+    .navbar-inverse {
+      background-color: #44e2dc;
+      border-color: #44e2dc;
+      height: 83px;
+    }
+    span.glyphicon.glyphicon-chevron-right {
+      margin-right: 10px;
+      font-size: 16px;
+      color: #61d261;
+    }
 
 
 
 
-i.fa.fa-plus.tooltip_category.sub {
-    font-size: 15px;
-	color: #1a82c3;
-}
-i.fa.fa-support.sup {
-    margin-right: 6px;
-    color: red;
-    font-size: 17px;
-}
-span.subcategory {
-    font-size: 14px;
-	 cursor: pointer;
-}
-  span.maincategory {
-  cursor: pointer;
-  color: #1a82c3;
-    font-size: 18px;
-    font-style: italic;
-}
+    i.fa.fa-plus.tooltip_category.sub {
+      font-size: 15px;
+      color: #1a82c3;
+    }
 
-	 button.btn.btn-primary.add {
-    margin-right: 19px;
-    float: right;
-    margin-top: 16px;
-}
-	.container.category
-	 {
-         width: 100%;
-   /*margin-top: 97px;*/
-     }
-	 #nav ul.sub-nav {
-    display: none;
-     }
+    i.fa.fa-pencil.tooltip_category.sub {
+      font-size: 15px;
+      color: #3eb928;
+    }
 
-	#nav ul.visible {
-		display: block;
-	}
-		 #nav2 ul.sub-nav {
-    display: none;
-     }
+    i.fa.fa-trash-o.tooltip_category.sub {
+      font-size: 15px;
+      color: #ea0707;
+    }
+    i.fa.fa-hand-o-right.sup {
+      margin-right: 6px;
+      color: #867e7e;
+      font-size: 17px;
+    }
+    span.subcategory {
+      font-size: 14px;
+      cursor: pointer;
+    }
+    span.maincategory {
+      cursor: pointer;
+      color: #1a82c3;
+      font-size: 18px;
+      font-style: Bold;
+    }
 
-	#nav2 ul.visible {
-		display: block;
-	}
+    button.btn.btn-primary.add {
+      margin-right: 19px;
+      float: right;
+      margin-top: 16px;
+    }
+    .container.category
+    {
+      width: 100%;
+      /*margin-top: 97px;*/
+    }
+    #nav ul.sub-nav {
+      display: none;
+    }
 
-	span.listcat {
-    cursor: pointer;
-    font-size: 18px;
-      }
+    #nav ul.visible {
+      display: block;
+    }
+    #nav2 ul.sub-nav {
+      display: none;
+    }
 
-	 span.listcat1 {
-    cursor: pointer;
-     }
+    #nav2 ul.visible {
+      display: block;
+    }
 
+    span.listcat {
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    span.listcat1 {
+      cursor: pointer;
+    }
+    .modal-content{
+      width: 160%;
+      margin-left: -23%;
+    }
 
 
     </style>
@@ -141,11 +168,12 @@ span.subcategory {
 </ul>
 </div>
 <div class="row">
+
 <div class="col-md-6">
 <div class="container category">
   <div class="">
-     <button type="button" class="btn btn-primary add" data-toggle="modal" data-target="#myModal1" >Add Category</button>
-            </div><h2 style="color: red;font-style: italic;">Category List</h2>
+    
+  </div><h2 style="color: red;font-style: italic;">Category List</h2>
 
   <div id="category">
 
@@ -153,6 +181,7 @@ span.subcategory {
 
 </div>
 </div>
+
 <div class="col-md-6">
   <div id="showProduct">
     <form name="surveyForm" ng-submit="addSurvey()">
@@ -284,7 +313,7 @@ span.subcategory {
   </div>
 
 <script src="js/bootstrap.min.js"></script>
-<script src="admin_demo.js"></script>
+<script src="admin_demo2.js"></script>
 <script>
 
 	getCategory();

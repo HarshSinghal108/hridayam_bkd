@@ -27,9 +27,12 @@
   <script type="text/javascript" src="angular.min.js"></script>
   <script src="js/jquery.min.js"></script>
   <script src="config.js"></script>
+  <script src="js/bootbox.js"></script>
+
 
   <script src="admin_demo.js"></script>
   <script src="app.js"></script>
+  <script src="bower_components/angular-base64-upload/dist/angular-base64-upload.js"></script>
 
 
   <style>
@@ -42,14 +45,14 @@
   }
   i.fa.fa-pencil.tooltip_category {
     cursor: pointer;
-    font-size: 21px;
+    font-size: 16px;
     float: right;
     margin-left: 12px;
     color: #3eb928;
   }
   i.fa.fa-trash-o.tooltip_category {
     cursor: pointer;
-    font-size: 21px;
+    font-size: 16px ;
     float: right;
     margin-left: 12px;
     color: #ea0707;
@@ -132,7 +135,7 @@
     cursor: pointer;
   }
   .modal-content{
-    width: 150%;
+    width: 160%;
     margin-left: -23%;
   }
 
@@ -307,13 +310,19 @@
             <br>
 
             <div ng-repeat="i in getNumber(number) track by $index">
+              <div id="{{$index}}">
               <input class="form-control input-sm" id="inputsm" type="text" name="weight{{$index}}" ng-model="weight" placeholder="Wieght">
               <input class="form-control input-sm" id="inputsm" type="text" name="price{{$index}}" ng-model="price" placeholder="Price">
               <input class="form-control input-sm" id="inputsm" type="text" name="packing{{$index}}" ng-model="packing" placeholder="Packing">
               <input class="form-control input-sm" id="inputsm" type="text" name="piece{{$index}}" ng-model="piece" placeholder="Piece">
               <input class="form-control input-sm" id="inputsm" type="text" name="type{{$index}}" ng-model="type" placeholder="Type">
-
+              <i title="Delete" ng-click="delete_row_add($index)" name="cross{{$index}}" class="fa fa-times tooltip_cross" aria-hidden="true"></i>
             </div>
+            </div><br>
+            <label class="btn btn-default btn-file">
+              <input type='file' ng-model='productImage' base-sixty-four-input>
+            </label>
+            <br><br>
             <button type="button" class="btn btn-primary"  ng-click="increase_count()" style="width: 82px;">Add rows</button>
           </div>
           <div class="modal-footer">
@@ -349,13 +358,19 @@
             <br>
 
             <div ng-repeat="i in subProduct track by $index">
+              <div id="{{$index}}">
               <input class="form-control input-sm" id="inputsm" type="text" name="editweight{{$index}}" ng-model="i.bsp_weight" value={i.bsp_weight} placeholder="Wieght">
               <input class="form-control input-sm" id="inputsm" type="text" name="editprice{{$index}}" ng-model="i.bsp_price" placeholder="Price">
               <input class="form-control input-sm" id="inputsm" type="text" name="editpacking{{$index}}" ng-model="i.bsp_packing" placeholder="Packing">
               <input class="form-control input-sm" id="inputsm" type="text" name="editpiece{{$index}}" ng-model="i.bsp_piece" placeholder="Piece">
               <input class="form-control input-sm" id="inputsm" type="text" name="edittype{{$index}}" ng-model="i.bsp_type" placeholder="Type">
-
+              <i title="Delete" ng-click="delete_row_edit($index)" name="cross{{$index}}" class="fa fa-times tooltip_cross" aria-hidden="true"></i>
             </div>
+          </div><br>
+          <label class="btn btn-default btn-file">
+            <input type='file' ng-model='productImage' base-sixty-four-input>
+          </label>
+          <br><br>
             <button type="button" class="btn btn-primary"  ng-click="increase_array_count()" style="width: 82px;">Add rows</button>
           </div>
           <div class="modal-footer">
@@ -369,6 +384,7 @@
 
 
 </div>
+
 <div align="center" id="loader"> <img style=" height: 47px; width: 50px;" src="loader.gif"></div>
 </div>
 
