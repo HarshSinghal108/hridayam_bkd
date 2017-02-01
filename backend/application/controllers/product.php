@@ -61,7 +61,36 @@ Class product extends CI_CONTROLLER {
 			}
 			else
 			{
-				$prod_data=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id'],'product_category_id'=>$cat[0]['category_parent_id'],'product_added_on'=>time(),'product_updated_on'=>time());
+
+
+				$img_data=$data['prod_img'];
+				$ext_type= explode(';', $img_data)[0];
+				if($ext_type=="data:image/png")
+				{
+					$ext='.png';
+				}
+				else if($ext_type=="data:image/jpeg")
+				{
+					$ext='.jpeg';
+				}
+				else if($ext_type=="data:image/jpg")
+				{
+					$ext='.jpg';
+				}
+				else if($ext_type=="data:image/gif")
+				{
+					$ext='.gif';
+				}
+
+
+		   		$image_type = array("data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,", "data:image/gif;base64,");
+				$img_data= str_replace($image_type, '', $img_data);
+				$img = base64_decode($img_data);
+				$f='product_'.time().$ext;
+				$file_name=FCPATH.'/images/'.$f;
+				$success = file_put_contents($file_name, $img);
+
+				$prod_data=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id'],'product_category_id'=>$cat[0]['category_parent_id'],'product_image'=>$f,'product_added_on'=>time(),'product_updated_on'=>time());
 				$product_id=$this->pm->add_product($prod_data);
 
 				for($i=0;$i<count($data['details']);$i++)
@@ -241,6 +270,41 @@ Class product extends CI_CONTROLLER {
 
 
 
+
+		public function upload(){
+
+
+		$data = file_get_contents("php://input");
+		$data = json_decode($data, TRUE);
+		$img_data=$data['prod_img'];
+		$ext_type= explode(';', $img_data)[0];
+		if($ext_type=="data:image/png")
+		{
+			$ext='.png';
+		}
+		else if($ext_type=="data:image/jpeg")
+		{
+			$ext='.jpeg';
+		}
+		else if($ext_type=="data:image/jpg")
+		{
+			$ext='.jpg';
+		}
+		else if($ext_type=="data:image/gif")
+		{
+			$ext='.gif';
+		}
+
+
+   		$image_type = array("data:image/jpeg;base64,", "data:image/png;base64,", "data:image/jpg;base64,", "data:image/gif;base64,");
+		$img_data= str_replace($image_type, '', $img_data);
+		$img = base64_decode($img_data);
+		$file_name=FCPATH.'/images/'.'product_'.time().$ext;
+		$success = file_put_contents($file_name, $img);
+
+			
+}
+
 	public function add_product_image()
     {
         $is_uploaded=$this->upload('prod_image');
@@ -262,7 +326,7 @@ Class product extends CI_CONTROLLER {
     }
 
 
-    public function upload($file)
+    public function upload1($file)
     {
     	if(isset($_FILES[$file]))
         {
