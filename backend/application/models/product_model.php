@@ -101,8 +101,7 @@ class Product_model extends CI_MODEL
     * * Return Values       : true or false
     * ****************************************************************************** */
     public function delete_product($where){
-      $this->db->where($where);
-      $this->db->update('bkd_product', array('product_status'=>2));
+      $sql=$this->db->delete('bkd_product',$where);
       if ($sql) {
         return $sql;
       } else {

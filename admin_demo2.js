@@ -110,7 +110,7 @@ $('.parent').click(function(){
 
 
 
-	$('#category').append('<a class="list-group-item" ><span ng-click="setCategory(\'' + parseJson.data.category[i].category_id + '\')" onclick="getSubCategory(\'' + sub_id + '\',\'' + parseJson.data.category[i].category_id + '\')" data-toggle="collapse" data-target="#'+sub_id+'" data-parent="#menu" class="maincategory">'+parseJson.data.category[i].category_name+'</span><i title="Edit Category" onclick="edit_category(\'' + parseJson.data.category[i].category_id + '\',\'' + parseJson.data.category[i].category_name + '\')" class="fa fa-pencil tooltip_category" aria-hidden="true"></i><i title="Add Category" onclick="add_sub_category(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i><i title="Add Product" onclick="product_add_modal(\'' + parseJson.data.category[i].category_id + '\')" class="fa fa-plus tooltip_category" aria-hidden="true"></i></a><div id='+sub_id+' class="sublinks collapse"><a class="list-group-item small"></a>')
+	$('#category').append('<a class="list-group-item" ><span ng-click="setCategory(\'' + parseJson.data.category[i].category_id + '\')" onclick="getSubCategory(\'' + sub_id + '\',\'' + parseJson.data.category[i].category_id + '\')" data-toggle="collapse" data-target="#'+sub_id+'" data-parent="#menu" class="maincategory">'+parseJson.data.category[i].category_name+'</span></a><div id='+sub_id+' class="sublinks collapse"><a class="list-group-item small"></a>')
 
 
 
@@ -175,7 +175,7 @@ $('.parent').click(function(){
 		var sub_id_1 = parseJson.data.product[j].product_name + parseJson.data.product[j].product_id;
 
 
-		 $("#"+sub_category_list).append("<a title='Product' class='list-group-item small'><i class='fa fa-hand-o-right sup'></i><span class='subcategory'  ngTouch='editProduct()'  onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.product[j].product_id + "\"); showProduct(\""+parseJson.data.product[j].product_id+"\",\""+parseJson.data.product[j].product_name+"\")'>"+parseJson.data.product[j].product_name+" </span><i title='EditProduct' ng-click='editProduct()'  onclick='edit_product(\"" + parseJson.data.product[j].product_id + "\")' class='fa fa-pencil tooltip_category' aria-hidden='true'></i><i title='Add Category' onclick='delete_product(\"" + parseJson.data.product[j].product_id + "\")' class='fa fa-trash-o tooltip_category' aria-hidden='true'></i></a>");
+		 $("#"+sub_category_list).append("<a title='Product' class='list-group-item small'><i class='fa fa-hand-o-right sup'></i><span class='subcategory'  ng-click='showProduct()'  onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.product[j].product_id + "\"); showProduct(\""+parseJson.data.product[j].product_id+"\",\""+parseJson.data.product[j].product_name+"\")'>"+parseJson.data.product[j].product_name+" </span></a>");
 
 
 	    }
@@ -190,7 +190,7 @@ $('.parent').click(function(){
 		var sub_id_1 = parseJson.data.category[j].category_name + parseJson.data.category[j].category_id;
 
 
-		 $("#"+sub_category_list).append("<a title='Category' class='list-group-item small'><span class='subcategory' onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.category[j].category_id + "\"),togglefunction(\"" + sub_id_1 + "\")'><span  class='glyphicon glyphicon-chevron-right'></span><span>"+parseJson.data.category[j].category_name+"</span></span> <i title='Add Category' onclick='add_sub_category(\"" + parseJson.data.category[j].category_id + "\")' class='fa fa-pencil tooltip_category' aria-hidden='true'></i> <i title='Add Category'  class='fa fa-plus tooltip_category sub' onclick='add_sub_category(\"" + parseJson.data.category[j].category_id + "\")' aria-hidden='true'></i><i onclick='product_add_modal(\"" + parseJson.data.category[j].category_id + "\")' title='Add Product' class='fa fa-plus tooltip_category sub' aria-hidden='true'></i>     <div style='display:none' id="+sub_id_1+"></div></a>");
+		 $("#"+sub_category_list).append("<a title='Category' class='list-group-item small'><span class='subcategory' onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.category[j].category_id + "\"),togglefunction(\"" + sub_id_1 + "\")'><span  class='glyphicon glyphicon-chevron-right'></span><span>"+parseJson.data.category[j].category_name+"</span></span>   <div style='display:none' id="+sub_id_1+"></div></a>");
 
 		// $("#"+sub_category_list).append("<ul id=''><li onclick='togglefunction(\""+sub_id_1+"\")'><span class='listcat1' onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data[j].category_id + "\")'>"+parseJson.data[j].category_name+"</span><i title='Add Category'  class='fa fa-plus tooltip_category' onclick='add_sub_category(\"" + parseJson.data[j].category_id + "\")' aria-hidden='true'></i><i onclick='product_add_modal(\"" + parseJson.data[j].category_id + "\")' title='Add Product'  class='fa fa-plus tooltip_category' aria-hidden='true'></i></li><div  style='display:none;' id="+sub_id_1+"></div></ul>");
 	    }
