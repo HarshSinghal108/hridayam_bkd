@@ -1,4 +1,4 @@
-var basePath = "http://www.baniyekidukaan.in/backend/index.php";
+var basePath = "http://baniyekidukaan.in/backend/index.php";
 
 var callAjax=function(url,type,dataObj,callback)
 {

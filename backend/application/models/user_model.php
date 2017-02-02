@@ -14,19 +14,60 @@ class User_model extends CI_MODEL
   }
 
 
-    /********************************************************************************
-    * * Function            : select_user
-    * * Description         : select user details
-    * * Input Parameters    : where condition
-    * * Return Values       :  true or false
-    * ****************************************************************************** */
-    public function select_user($where){
-      $this->db->where($where);
-      $query=$this->db->get('bkd_user')->result_array();
-      return $query;
-    }
+  /********************************************************************************
+  * * Function            : select_user
+  * * Description         : select user details
+  * * Input Parameters    : where condition
+  * * Return Values       :  true or false
+  * ****************************************************************************** */
+  public function select_user($where){
+    $this->db->where($where);
+    $query=$this->db->get('bkd_user')->result_array();
+    return $query;
+  }
 
 
+  /********************************************************************************
+  * * Function            : select_feedback
+  * * Description         : select feedback details
+  * * Input Parameters    : where condition
+  * * Return Values       :  true or false
+  * ****************************************************************************** */
+  public function select_feedback($where){
+    $this->db->where($where);
+    $query=$this->db->get('bkd_feedback')->result_array();
+    return $query;
+  }
+
+  /********************************************************************************
+  * * Function            : select_survey
+  * * Description         : select survey details
+  * * Input Parameters    : where condition
+  * * Return Values       :  true or false
+  * ****************************************************************************** */
+  public function select_survey($user_id){
+    $sql="SELECT BC.category_name,BP.product_name,BS.brand,BS.quantity,BS.size
+    FROM `bkd_survey` BS INNER JOIN `bkd_product` BP ON BS.product_id=BP.product_id
+    INNER JOIN `bkd_category` BC ON BC.category_id=BP.product_category_id
+    WHERE BS.user_id='".$user_id."'";
+    $query=$this->db->query($sql);
+    $arr=$query->result_array();
+    // print_r($arr);die;
+    return $arr;
+  }
+
+  /********************************************************************************
+  * * Function            : get_survey_details
+  * * Description         : get the deytails of survey fil bu the customer
+  * * Input Parameters    : userId of customer
+  * * Return Values       :  data of survey
+  * ****************************************************************************** */
+  public function get_survey_details($user_id){
+    $this->db->where(array('user_id'=>$user_id));
+    $query=$this->db->get('bkd_survey')->result_array();
+    return $query;
+
+  }
   /********************************************************************************
   * * Function            : check if user exist or not
   * * Description         : check if mobile number or email are unique or not
@@ -165,15 +206,15 @@ class User_model extends CI_MODEL
 
   public function add_survey($data)
   {
-      $query=$this->db->insert('bkd_survey',$data);
-      if($this->db->affected_rows()==1)
-      {
-        return $this->db->insert_id();
-      }
-      else
-      {
-        return false;
-      }
+    $query=$this->db->insert('bkd_survey',$data);
+    if($this->db->affected_rows()==1)
+    {
+      return $this->db->insert_id();
+    }
+    else
+    {
+      return false;
+    }
 
   }
 

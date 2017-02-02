@@ -30,13 +30,15 @@
 
       $http({
         method  : 'POST',
-        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user",
+        url     : "http://baniyekidukaan.in/backend/index.php/user/add_user",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
         //  console.log(JSON.stringify(response));
         if(response.data.status==true){
-          bootbox.alert("Success");
+          bootbox.confirm("Customer Added Successfully !", function(result){
+            window.location.href = 'http://baniyekidukaan.in/feedback.html';
+           });
         }
         else {
           bootbox.alert(response.data.msg);
@@ -56,7 +58,7 @@
     $scope.customer={};
     $http({
       method  : 'POST',
-      url     : "http://www.baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
+      url     : "http://baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -66,11 +68,13 @@
         console.log($scope.loggedIn);
         $scope.customer.customerId=response.data.data.user_id;
         $scope.customer.referalCode=response.data.data.user_referal_code;
-        bootbox.alert("Success");
+        // bootbox.alert("Success");
       }
       else {
         $scope.loggedIn=0;
-        bootbox.alert(response.data.msg);
+      bootbox.confirm("Need to add Customer First!", function(result){
+        window.location.href = 'http://baniyekidukaan.in/customer.html';
+       });
       }
 
     }, function myError(response) {
@@ -89,13 +93,20 @@
 
       $http({
         method  : 'POST',
-        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user_feedback",
+        url     : "http://baniyekidukaan.in/backend/index.php/user/add_user_feedback",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
         //  console.log(JSON.stringify(response));
         if(response.data.status==true){
-          bootbox.alert("Feedback Submited");
+          $scope.userId="";
+          $scope.medium="";
+          $scope.schedule="";
+          $scope.feedback="";
+          $scope.suggestion="";
+          bootbox.confirm("Feedback Submited!", function(result){
+            window.location.href = 'http://baniyekidukaan.in/Survey.html';
+           });
         }
         else {
           bootbox.alert(response.data.msg);
@@ -117,6 +128,26 @@
   app.controller('Survey', function($scope, $http) {
 
     $scope.survey={};
+
+    $http({
+      method  : 'POST',
+      url     : "http://baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
+      data    : $scope.data, //forms user object
+      headers : {'Content-Type': 'application/x-www-form-urlencoded'}
+    }).then(function mySucces(response) {
+      //  console.log(JSON.stringify(response));
+      if(response.data.status==true){
+
+      }
+      else {
+        $scope.loggedIn=0;
+      bootbox.confirm("Need to add Customer First!", function(result){
+        window.location.href = 'http://baniyekidukaan.in/customer.html';
+       });
+     }
+   });
+
+
     $scope.addSurvey=function(){
       $scope.data={
         'product_id':document.getElementsByName('product_id')[0].value,
@@ -124,16 +155,17 @@
         'brand':$scope.brand,
         'size':$scope.size
       };
-
+      console.log('hi'+$scope.data);
       $http({
         method  : 'POST',
-        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_survey",
+        url     : "http://baniyekidukaan.in/backend/index.php/user/add_survey",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
         if(response.data.status==true){
-          bootbox.alert("Survey Added");
-        }
+          $("#showProduct").hide();
+          bootbox.alert("Details Submitted !!");
+            }
         else {
           bootbox.alert(response.data.msg);
         }
@@ -203,7 +235,7 @@
     console.log(JSON.stringify($scope.data));
     $http({
       method  : 'POST',
-      url     : "http://www.baniyekidukaan.in/backend/index.php/product/add_product",
+      url     : "http://baniyekidukaan.in/backend/index.php/product/add_product",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -225,7 +257,7 @@
     $scope.productId=localStorage.getItem("productId")
     $http({
       method  : 'POST',
-      url     : "http://www.baniyekidukaan.in/backend/index.php/product/get_product_details/"+$scope.productId,
+      url     : "http://baniyekidukaan.in/backend/index.php/product/get_product_details/"+$scope.productId,
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -267,7 +299,7 @@
     console.log($scope.data);
     $http({
       method  : 'POST',
-      url     : "http://www.baniyekidukaan.in/backend/index.php/product/edit_product",
+      url     : "http://baniyekidukaan.in/backend/index.php/product/edit_product",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -293,15 +325,15 @@
     console.log($scope.data);
     $http({
       method  : 'POST',
-      url     : "http://www.baniyekidukaan.in/backend/index.php/category/edit_category",
+      url     : "http://baniyekidukaan.in/backend/index.php/category/edit_category",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
       if(response.data.status==true){
         $scope.subProduct=[];
         $scope.product_name="";
-        $("#myModal3").modal('hide');
-        window.location.reload();
+        $("#myModal4").modal('hide');
+        getCategory();
 
       }
       else {

@@ -30,10 +30,13 @@ $('.parent').click(function(){
 
   function delete_product(productId){
     var dataObj={};
-    callAjax('product/delete_product/'+productId, 'POST', dataObj, delete_product_result );
+    bootbox.confirm("Are you sure to Delete Product?", function(result){
+      if(result)
+      callAjax('product/delete_product/'+productId, 'POST', dataObj, delete_product_result );
+     });
   }
   function delete_product_result(result) {
-    window.location.reload();
+    getCategory();
   }
 
   //add category
@@ -100,13 +103,13 @@ $('.parent').click(function(){
 	if(parseJson.status)
 	{
 
-	debugger;
+	// debugger;
 
 	var count = parseJson.data.category.length;
 	for(var i= 0; i < count; i += 1)
 	{
-
-	var sub_id = parseJson.data.category[i].category_name + parseJson.data.category[i].category_id;
+  var split_cat = parseJson.data.category[i].category_name.split(" ");
+	var sub_id = split_cat[0] + parseJson.data.category[i].category_id;
 
 
 
@@ -119,7 +122,8 @@ $('.parent').click(function(){
 	}
 	else
 	{
-		//alert(parseJson.msg);
+		$("#loader").hide();
+    bootbox.alert( parseJson.msg)
 	}
 	}
 
@@ -128,7 +132,7 @@ $('.parent').click(function(){
 //Get sub category of a category
 	function getSubCategory(category_div,category_id)
 	{
-		debugger;
+		// debugger;
 		//$("#loader").show();
 		sub_category_list = category_div;
 
@@ -171,8 +175,8 @@ $('.parent').click(function(){
 		for(var j= 0; j < count; j += 1)
 	    {
 
-
-		var sub_id_1 = parseJson.data.product[j].product_name + parseJson.data.product[j].product_id;
+    var split_cat = parseJson.data.product[j].product_name.split(" ");
+		var sub_id_1 = split_cat[0] + parseJson.data.product[j].product_id;
 
 
 		 $("#"+sub_category_list).append("<a title='Product' class='list-group-item small'><i class='fa fa-hand-o-right sup'></i><span class='subcategory'  ngTouch='editProduct()'  onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.product[j].product_id + "\"); showProduct(\""+parseJson.data.product[j].product_id+"\",\""+parseJson.data.product[j].product_name+"\")'>"+parseJson.data.product[j].product_name+" </span><i title='EditProduct' ng-click='editProduct()'  onclick='edit_product(\"" + parseJson.data.product[j].product_id + "\")' class='fa fa-pencil tooltip_category' aria-hidden='true'></i><i title='Add Category' onclick='delete_product(\"" + parseJson.data.product[j].product_id + "\")' class='fa fa-trash-o tooltip_category' aria-hidden='true'></i></a>");
@@ -187,7 +191,8 @@ $('.parent').click(function(){
 	    {
 
 
-		var sub_id_1 = parseJson.data.category[j].category_name + parseJson.data.category[j].category_id;
+        var split_cat = parseJson.data.category[j].category_name.split(" ");
+      	var sub_id_1 = split_cat[0] + parseJson.data.category[j].category_id;
 
 
 		 $("#"+sub_category_list).append("<a title='Category' class='list-group-item small'><span class='subcategory' onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.category[j].category_id + "\"),togglefunction(\"" + sub_id_1 + "\")'><span  class='glyphicon glyphicon-chevron-right'></span><span>"+parseJson.data.category[j].category_name+"</span></span> <i title='Add Category' onclick='add_sub_category(\"" + parseJson.data.category[j].category_id + "\")' class='fa fa-pencil tooltip_category' aria-hidden='true'></i> <i title='Add Category'  class='fa fa-plus tooltip_category sub' onclick='add_sub_category(\"" + parseJson.data.category[j].category_id + "\")' aria-hidden='true'></i><i onclick='product_add_modal(\"" + parseJson.data.category[j].category_id + "\")' title='Add Product' class='fa fa-plus tooltip_category sub' aria-hidden='true'></i>     <div style='display:none' id="+sub_id_1+"></div></a>");

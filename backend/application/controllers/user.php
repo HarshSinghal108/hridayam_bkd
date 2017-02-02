@@ -2,8 +2,7 @@
 header('Access-Control-Allow-Origin: *');
 
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
-Class user extends CI_CONTROLLER {
+Class user extends CI_CONTROLLER{
 
 
   public function __construct(){
@@ -13,6 +12,105 @@ Class user extends CI_CONTROLLER {
     $this->input_arr=include('variables/user_variables.php');
     $this->load->model('general_model','gm',true);
     $this->load->model('user_model','um',true);
+
+  }
+
+  public function excel(){
+    if(!($user_id = $this->session->userdata('user_id'))){
+      $this->gm->send_response(false,'Please_Add_User_First','','');
+    }
+
+
+    $f = fopen('php://memory', 'w');
+    /** loop through array  */
+
+    $output_file_name=$user_id.'.csv';
+
+    //fetch user data
+    $where = array('user_id' => $user_id );
+    $user_details=$this->um->select_user($where);
+
+
+    $user_headings=array(
+      'User Id',
+      'First Name',
+      'Last Name',
+      'Gender',
+      'Mobile',
+      'Telephone',
+      'Email',
+      'Birthday',
+      'Marriage Annerversery',
+      'Joined Date'
+    );
+    $user_values=array(
+      $user_details[0]['user_id'],
+      $user_details[0]['user_first_name'],
+      $user_details[0]['user_last_name'],
+      $user_details[0]['user_gender'],
+      $user_details[0]['user_mobile'],
+      $user_details[0]['user_telephone'],
+      $user_details[0]['user_email'],
+      date('Y-m-d',$user_details[0]['user_dob']),
+      date('Y-m-d',$user_details[0]['user_dom']),
+      date('Y-m-d',$user_details[0]['user_added_on']),
+    );
+
+    fputcsv($f, $user_headings);
+    fputcsv($f, $user_values);
+    $empty=[];
+    fputcsv($f, $empty);fputcsv($f, $empty);fputcsv($f, $empty);
+
+    //fetch feedback data
+    $where = array('bf_user_id' => $user_id   );
+    $feedback_details=$this->um->select_feedback($where);
+
+    // print_r($feedback_details);die;
+
+    $feedback_headings=array(
+      'Shopping Medium',
+      'Shopping Schedule',
+      'Feedback',
+      'Suggestion',
+    );
+    $feedback_values=array(
+      $feedback_details[0]['bf_shopping_medium'],
+      $feedback_details[0]['bf_shopping_schedule'],
+      $feedback_details[0]['bf_feedback'],
+      $feedback_details[0]['bf_suggestion'],
+    );
+
+    fputcsv($f, $feedback_headings);
+    fputcsv($f, $feedback_values);
+    $empty=[];
+    fputcsv($f, $empty);fputcsv($f, $empty);fputcsv($f, $empty);
+
+    //fetch survey data
+    $survey_details=$this->um->select_survey($user_id);
+
+    $survey_headings=array(
+      'Category Name',
+      'Product Name',
+      'Brand',
+      'Quantity',
+      'Size'
+    );
+
+    fputcsv($f, $survey_headings);
+    foreach ($survey_details as $line){
+    /** default php csv handler **/
+        fputcsv($f, $line);
+    }
+    /** rewrind the "file" with the csv lines **/
+
+
+    fseek($f, 0);
+    /** modify header to be downloadable csv file **/
+    header('Content-Type: application/csv');
+    header('Content-Disposition: attachement; filename="' . $output_file_name . '";');
+    /** Send file to browser for download */
+    fpassthru($f);
+
 
   }
 
@@ -49,8 +147,7 @@ Class user extends CI_CONTROLLER {
 
   public function add_user_feedback(){
     //$this->session->unset_userdata('user_id');
-    if(!($user_id = $this->session->userdata('user_id')))
-    {
+    if(!($user_id = $this->session->userdata('user_id'))){
       $this->gm->send_response(false,'Please_Add_User_First','','');
     }
 
@@ -59,8 +156,17 @@ Class user extends CI_CONTROLLER {
 
     if(isset($data['shopping_medium']) && isset($data['shopping_schedule'])&& isset($data['feedback']) && isset($data['suggestion']))
     {
+      foreach ($data['shopping_medium'] as $key => $value) {
+        if($data['shopping_medium'][$key]==true)
+          $shopping_medium=$key;
+      }
+
+      foreach ($data['shopping_schedule'] as $key => $value) {
+        if($data['shopping_schedule'][$key]==true)
+          $shopping_schedule=$key;
+      }
       $where=array('bf_user_id'=>$user_id);
-      $feedback_data=array('bf_user_id'=>$user_id,'bf_shopping_medium'=>$data['shopping_medium'],'bf_shopping_schedule'=>$data['shopping_schedule'],'bf_feedback'=>$data['feedback'],'bf_suggestion'=>$data['suggestion'],'bf_added_on'=>time(),'bf_updated_on'=>time());
+      $feedback_data=array('bf_user_id'=>$user_id,'bf_shopping_medium'=>$shopping_medium,'bf_shopping_schedule'=>$shopping_schedule,'bf_feedback'=>$data['feedback'],'bf_suggestion'=>$data['suggestion'],'bf_added_on'=>time(),'bf_updated_on'=>time());
       $bf_id=$this->um->add_user_feedback($feedback_data,$where);
 
       if(!$bf_id)
@@ -118,20 +224,20 @@ Class user extends CI_CONTROLLER {
   * * Input Parameters    :
   * * Return Values       : user data
   * ****************************************************************************** */
-    public function is_user_loggedin(){
-      if(!($user_id = $this->session->userdata('user_id'))){
-        $this->gm->send_response(false,'No_Session','','');
-      }
-
-      $where_user = array('user_id' => $user_id );
-      $response=$this->um->select_user($where_user);
-      if(count($response)){
-        $this->gm->send_response(true,"Session_Exist",'',$response[0]);
-      }
-      else {
-          $this->gm->send_response(false,"Some_Error_Occured",'','');
-      }
+  public function is_user_loggedin(){
+    if(!($user_id = $this->session->userdata('user_id'))){
+      $this->gm->send_response(false,'No_Session','','');
     }
+
+    $where_user = array('user_id' => $user_id );
+    $response=$this->um->select_user($where_user);
+    if(count($response)){
+      $this->gm->send_response(true,"Session_Exist",'',$response[0]);
+    }
+    else {
+      $this->gm->send_response(false,"Some_Error_Occured",'','');
+    }
+  }
   /********************************************************************************
   * * Function            : Signup
   * * Description         : Signup module
@@ -291,47 +397,47 @@ Class user extends CI_CONTROLLER {
 
 
   /********************************************************************************
-   * * Function            : Change Password
-   * * Description         : Change password if you already know old password
-   * * Input Parameters    : old password & new password
-   * * Return Values       :  true or false(JSON)
-   * ****************************************************************************** */
-   public function change_password(){
-     if(!$user_id=$this->session->userdata('user_id')){//check if someone is allready logged in or not
-       $this->gm->send_response(false,'Session_Expired','','');
-     }
+  * * Function            : Change Password
+  * * Description         : Change password if you already know old password
+  * * Input Parameters    : old password & new password
+  * * Return Values       :  true or false(JSON)
+  * ****************************************************************************** */
+  public function change_password(){
+    if(!$user_id=$this->session->userdata('user_id')){//check if someone is allready logged in or not
+      $this->gm->send_response(false,'Session_Expired','','');
+    }
 
-     //take input
-     $data = file_get_contents("php://input");
-     $data = json_decode($data, TRUE);
+    //take input
+    $data = file_get_contents("php://input");
+    $data = json_decode($data, TRUE);
 
-     //check vallidation
-     $fields = array('old_password','new_password');
-     $this->gm->check_empty_fields($data,$fields);
+    //check vallidation
+    $fields = array('old_password','new_password');
+    $this->gm->check_empty_fields($data,$fields);
 
-     $old_password=$data['old_password'];
-     $new_password=$data['new_password'];
+    $old_password=$data['old_password'];
+    $new_password=$data['new_password'];
 
-     $where_user = array('user_id' => $user_id );
-     $response=$this->um->select_user($where_user);
-     if(count($response)){
-       if($response[0]['user_password']==md5($old_password)){
-         $update_data=array('user_password'=>md5($new_password));
-         $response=$this->um->update_user($update_data,$where_user);
-         if($response){
-           $this->gm->send_response(true,'Success','',$response);
-         }
-         else {
-           $this->gm->send_response(false,'Some_Error_Occured','somme_error_occured_while_updating_data','');
-         }
-       }
-       else {
-         $this->gm->send_response(false,'Invalid_Old_Password','','');
-       }
-     }
-     else {
-       $this->gm->send_response(false,"Invalid_User",'','');
-     }
-   }
+    $where_user = array('user_id' => $user_id );
+    $response=$this->um->select_user($where_user);
+    if(count($response)){
+      if($response[0]['user_password']==md5($old_password)){
+        $update_data=array('user_password'=>md5($new_password));
+        $response=$this->um->update_user($update_data,$where_user);
+        if($response){
+          $this->gm->send_response(true,'Success','',$response);
+        }
+        else {
+          $this->gm->send_response(false,'Some_Error_Occured','somme_error_occured_while_updating_data','');
+        }
+      }
+      else {
+        $this->gm->send_response(false,'Invalid_Old_Password','','');
+      }
+    }
+    else {
+      $this->gm->send_response(false,"Invalid_User",'','');
+    }
+  }
 
 }

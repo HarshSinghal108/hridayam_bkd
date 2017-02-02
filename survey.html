@@ -19,7 +19,7 @@
   <!-- Custom styling plus plugins -->
 
   <!-- <link href="css/icheck/flat/green.css" rel="stylesheet"> -->
-  <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,7 +28,10 @@
     <script type="text/javascript" src="angular.min.js"></script>
     <script src="js/jquery.min.js"></script>
     <script src="config.js"></script>
+    <script src="js/bootbox.js"></script>
 
+
+    <script src="bower_components/angular-base64-upload/dist/angular-base64-upload.js"></script>
     <!-- <script src="admin_demo2.js"></script> -->
     <script src="app.js"></script>
 
@@ -132,10 +135,11 @@
     span.listcat1 {
       cursor: pointer;
     }
-    .modal-content{
-      width: 160%;
-      margin-left: -23%;
-    }
+
+    .export {
+    margin-top: 10%;
+    margin-left: 80%;
+}
 
 
     </style>
@@ -150,7 +154,7 @@
       <img src="images/logo.png" class="img-circle main_logo" alt="Image Not Avail" width="80" height="80">
       <a class="navbar-brand brand_name" href="#" >Baniye Ki Dukaan</a>
     </div>
-    <a class="contact" href="#">Contact no. 9568997343 </a>
+    <a class="contact" href="#">Contact no. 9058545537 </a>
     <div class="tag_line">Aapki apni dukaan, now in Kosi Kalan</div>
 
   </div>
@@ -172,7 +176,7 @@
 <div class="col-md-6">
 <div class="container category">
   <div class="">
-    
+
   </div><h2 style="color: red;font-style: italic;">Category List</h2>
 
   <div id="category">
@@ -183,6 +187,10 @@
 </div>
 
 <div class="col-md-6">
+  <form name="surveyForm" class="export" method="GET" action="http://baniyekidukaan.in/backend/index.php/user/excel">
+    <button type="submit"  class="btn btn-default">Export File</button>
+  </form>
+
   <div id="showProduct">
     <form name="surveyForm" ng-submit="addSurvey()">
       <div id="productName"></div>
@@ -191,7 +199,10 @@
       </div>
       <div class="form-group">
         <label for="quantity">Quantity:</label>
-        <input type="text" class="form-control" id="quantity" ng-model="quantity">
+        <i title="Delete" ng-click="delete_row_add($index)" name="cross{{$index}}" class="fa fa-times tooltip_cross" aria-hidden="true"></i>
+        <input type="text" class="form-control input-sm" id="quantity" ng-model="quantity">
+        <i title="Delete" ng-click="delete_row_add($index)" name="cross{{$index}}" class="fa fa-times tooltip_cross" aria-hidden="true"></i>
+
       </div>
       <div class="form-group">
         <label for="Brand">Brand:</label>
@@ -201,8 +212,10 @@
         <label for="Size">Size:</label>
         <input type="text" class="form-control" id="size" ng-model="size">
       </div>
-      <button type="submit" class="btn btn-default">Submit</button>
+      <button type="submit"  class="btn btn-default">Submit</button>
     </form>
+
+
   </div>
   <div id="result"></div>
 
