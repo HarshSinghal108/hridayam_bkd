@@ -30,14 +30,14 @@
 
       $http({
         method  : 'POST',
-        url     : "http://baniyekidukaan.in/backend/index.php/user/add_user",
+        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
         //  console.log(JSON.stringify(response));
         if(response.data.status==true){
           bootbox.confirm("Customer Added Successfully !", function(result){
-            window.location.href = 'http://baniyekidukaan.in/feedback.html';
+            window.location.href = 'http://www.baniyekidukaan.in/feedback.html';
            });
         }
         else {
@@ -58,7 +58,7 @@
     $scope.customer={};
     $http({
       method  : 'POST',
-      url     : "http://baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
+      url     : "http://www.baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -73,7 +73,7 @@
       else {
         $scope.loggedIn=0;
       bootbox.confirm("Need to add Customer First!", function(result){
-        window.location.href = 'http://baniyekidukaan.in/customer.html';
+        window.location.href = 'http://www.baniyekidukaan.in/customer.html';
        });
       }
 
@@ -93,7 +93,7 @@
 
       $http({
         method  : 'POST',
-        url     : "http://baniyekidukaan.in/backend/index.php/user/add_user_feedback",
+        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_user_feedback",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
@@ -105,7 +105,7 @@
           $scope.feedback="";
           $scope.suggestion="";
           bootbox.confirm("Feedback Submited!", function(result){
-            window.location.href = 'http://baniyekidukaan.in/Survey.html';
+            window.location.href = 'http://www.baniyekidukaan.in/Survey.html';
            });
         }
         else {
@@ -131,7 +131,7 @@
 
     $http({
       method  : 'POST',
-      url     : "http://baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
+      url     : "http://www.baniyekidukaan.in/backend/index.php/user/is_user_loggedin",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -142,7 +142,7 @@
       else {
         $scope.loggedIn=0;
       bootbox.confirm("Need to add Customer First!", function(result){
-        window.location.href = 'http://baniyekidukaan.in/customer.html';
+        window.location.href = 'http://www.baniyekidukaan.in/customer.html';
        });
      }
    });
@@ -158,7 +158,7 @@
       console.log('hi'+$scope.data);
       $http({
         method  : 'POST',
-        url     : "http://baniyekidukaan.in/backend/index.php/user/add_survey",
+        url     : "http://www.baniyekidukaan.in/backend/index.php/user/add_survey",
         data    : $scope.data, //forms user object
         headers : {'Content-Type': 'application/x-www-form-urlencoded'}
       }).then(function mySucces(response) {
@@ -235,7 +235,7 @@
     console.log(JSON.stringify($scope.data));
     $http({
       method  : 'POST',
-      url     : "http://baniyekidukaan.in/backend/index.php/product/add_product",
+      url     : "http://www.baniyekidukaan.in/backend/index.php/product/add_product",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -257,7 +257,7 @@
     $scope.productId=localStorage.getItem("productId")
     $http({
       method  : 'POST',
-      url     : "http://baniyekidukaan.in/backend/index.php/product/get_product_details/"+$scope.productId,
+      url     : "http://www.baniyekidukaan.in/backend/index.php/product/get_product_details/"+$scope.productId,
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -299,7 +299,7 @@
     console.log($scope.data);
     $http({
       method  : 'POST',
-      url     : "http://baniyekidukaan.in/backend/index.php/product/edit_product",
+      url     : "http://www.baniyekidukaan.in/backend/index.php/product/edit_product",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
@@ -325,7 +325,7 @@
     console.log($scope.data);
     $http({
       method  : 'POST',
-      url     : "http://baniyekidukaan.in/backend/index.php/category/edit_category",
+      url     : "http://www.baniyekidukaan.in/backend/index.php/category/edit_category",
       data    : $scope.data, //forms user object
       headers : {'Content-Type': 'application/x-www-form-urlencoded'}
     }).then(function mySucces(response) {
