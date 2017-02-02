@@ -6,14 +6,14 @@
   font-size:35px;
   font-weight:bold;
   font-family:monospace;
-  color: black;
+  color: #d04040;
 }
 
 .brand_name2{
   font-size: 35px;
   font-weight: bold;
   font-family: monospace;
-  color: black;
+  color: #d04040;
   margin-top: -49px;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .navbar{
-  background-color: #44e2dc;
+  background-color: #212769;
   border-bottom:1px solid #e3e3e3;
 }
 .content1{
@@ -51,7 +51,7 @@
 
 .contact{
   float: right;
-  color: black;
+  color: white;
 }
 
 .footer_social_logo{
@@ -63,6 +63,8 @@
 .tag_line{
   margin-left: 55%;
   margin-top: 4%;
+  color: white;
+  font-family: Blippo, fantasy;
 }
 
 .carousel-inner>.item>img {
