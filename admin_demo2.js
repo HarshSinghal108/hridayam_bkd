@@ -151,9 +151,10 @@ function getCategory()
 
   }
 
-  function showProduct(product_id,product_name) {
+  function showProduct(product_id,product_name,product_image) {
     $("#showProduct").show();
     $("#productName").html("<h2>"+product_name+"<h2>")
+    $("#productName").html("<img src='http://www.baniyekidukaan.in/backend/images/'+product_image");
     $('input[name="product_id"]').val(product_id);
   }
 
@@ -178,7 +179,7 @@ function getCategory()
           var split_cat = parseJson.data.product[j].product_name.split(" ");
           var sub_id_1 = split_cat[0] + parseJson.data.product[j].product_id;
 
-          $("#"+sub_category_list).append("<a title='Product' class='list-group-item small'><i class='fa fa-hand-o-right sup'></i><span class='subcategory'  ng-click='showProduct()'  onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.product[j].product_id + "\"); showProduct(\""+parseJson.data.product[j].product_id+"\",\""+parseJson.data.product[j].product_name+"\")'>"+parseJson.data.product[j].product_name+" </span></a>");
+          $("#"+sub_category_list).append("<a title='Product' class='list-group-item small'><i class='fa fa-hand-o-right sup'></i><span class='subcategory'  ng-click='showProduct()'  onclick='getSubCategory(\"" + sub_id_1 + "\",\"" + parseJson.data.product[j].product_id + "\"); showProduct(\""+parseJson.data.product[j].product_id+"\",\""+parseJson.data.product[j].product_name+"\",\""+parseJson.data.product[j].product_image+"\")'>"+parseJson.data.product[j].product_name+" </span></a>");
 
 
         }

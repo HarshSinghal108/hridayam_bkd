@@ -198,15 +198,13 @@
   <div id="showProduct">
     <form name="surveyForm" ng-submit="addSurvey()">
       <div id="productName"></div>
+      <div id="productImage"></div>
       <div class="form-group">
         <input type="hidden" class="form-control" id="productId" value="" ng-model="id" name="product_id">
       </div>
       <div class="form-group">
         <label for="quantity">Quantity:</label>
-        <i title="Delete" ng-click="delete_row_add($index)" name="cross{{$index}}" class="fa fa-times tooltip_cross" aria-hidden="true"></i>
         <input type="text" class="form-control input-sm" id="quantity" ng-model="quantity">
-        <i title="Delete" ng-click="delete_row_add($index)" name="cross{{$index}}" class="fa fa-times tooltip_cross" aria-hidden="true"></i>
-
       </div>
       <div class="form-group">
         <label for="Brand">Brand:</label>
