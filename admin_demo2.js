@@ -155,7 +155,7 @@ function getCategory()
     $("#showProduct").show();
     $("#productName").html("<h2>"+product_name+"<h2>");
     console.log(product_image);
-    $("#productImage").html("<img src='http://www.baniyekidukaan.in/backend/images/"+product_image+"'>");
+    $("#productImage").html("<img src='http://www.baniyekidukaan.in/backend/images/"+product_image+"  '>");
     $('input[name="product_id"]').val(product_id);
   }
 
