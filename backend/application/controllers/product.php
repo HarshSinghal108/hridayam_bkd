@@ -87,7 +87,7 @@ Class product extends CI_CONTROLLER {
 				$img_data= str_replace($image_type, '', $img_data);
 				$img = base64_decode($img_data);
 				$f='product_'.time().$ext;
-				$file_name=FCPATH.'product_images/'.$f;
+				$file_name=FCPATH.'images/'.$f;
 				$success = file_put_contents($file_name, $img);
 
 				$prod_data=array('product_name'=>$data['product_name'],'product_subcategory_id'=>$data['category_id'],'product_category_id'=>$cat[0]['category_parent_id'],'product_image'=>$f,'product_added_on'=>time(),'product_updated_on'=>time());
