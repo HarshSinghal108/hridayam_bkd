@@ -229,7 +229,7 @@
     }
     }
     $scope.data.product_name=document.getElementsByName('product_name')[0].value;
-    $scope.data.product_image=$scope.productImage;
+    $scope.data.product_image='data:'+$scope.productImage.filetype+';base64,'+$scope.productImage.base64;
     // 'product_name':,
     $scope.data.category_id=localStorage.getItem("categoryId")
     console.log(JSON.stringify($scope.data));
