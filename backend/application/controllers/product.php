@@ -29,7 +29,7 @@ Class product extends CI_CONTROLLER {
 		$data = json_decode($data, TRUE);
 
 
-		if(isset($data['product_name']) && isset($data['category_id']) && isset($data['prod_img']))
+		if(isset($data['product_name']) && isset($data['category_id']) && isset($data['prod_image']))
 		{
 
 			for($i=0;$i<count($data['details']);$i++)
@@ -63,7 +63,7 @@ Class product extends CI_CONTROLLER {
 			{
 
 
-				$img_data=$data['prod_img'];
+				$img_data=$data['prod_image'];
 				$ext_type= explode(';', $img_data)[0];
 				if($ext_type=="data:image/png")
 				{
